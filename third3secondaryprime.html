@@ -1,1 +1,3015 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1976d2">
+<meta name="description" content="Third Secondary Prime - منصة الثانوية العامة والأزهرية">
+<title>Third Secondary Prime</title>
 
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Cairo","Tahoma",sans-serif;
+}
+
+:root{
+    --gold:#1976d2;
+    --gold2:#64b5f6;
+    --dark:#171717;
+    --dark2:#222;
+    --white:#fff;
+    --light:#f7f7f7;
+    --gray:#777;
+    --border:#e9e9e9;
+    --success:#21a366;
+    --danger:#d93025;
+}
+
+body{
+    background:#eef6ff;
+    color:#171717;
+    min-height:100vh;
+}
+
+button,input,select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+    border:none;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* ================= INTRO ================= */
+
+#intro{
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle at 50% 20%,rgba(100,181,246,.28),transparent 35%),
+        linear-gradient(135deg,#063b7a,#1976d2);
+    color:#fff;
+    z-index:99999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    transition:opacity .7s,visibility .7s;
+}
+
+.intro-box{
+    width:min(90%,700px);
+    animation:introUp 1.2s ease;
+}
+
+.logo-circle{
+    width:110px;
+    height:110px;
+    border:3px solid var(--gold2);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+    font-size:45px;
+    box-shadow:0 0 40px rgba(100,181,246,.28);
+}
+
+.intro-box h1{
+    font-size:42px;
+    margin-top:22px;
+    color:#fff;
+}
+
+.intro-box h1 span{
+    color:var(--gold2);
+}
+
+.intro-box p{
+    color:#ddd;
+    margin:12px 0 28px;
+    font-size:17px;
+}
+
+.loading{
+    width:260px;
+    height:5px;
+    background:#444;
+    border-radius:20px;
+    overflow:hidden;
+    margin:auto;
+}
+
+.loading div{
+    width:0;
+    height:100%;
+    background:var(--gold2);
+    animation:load 2.7s forwards;
+}
+
+@keyframes load{
+    to{width:100%}
+}
+
+@keyframes introUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.intro-badge{display:inline-block;margin-top:18px;padding:8px 16px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.10);border-radius:999px;color:#dbeeff;font-size:13px}.intro-sub{margin:18px auto 24px;color:#dbeeff;font-size:15px}
+/* ================= AUTH ================= */
+
+#auth{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+    background:
+        radial-gradient(circle at top,#fff7d9,transparent 30%),
+        #f7f7f7;
+}
+
+.auth-card{
+    width:min(460px,100%);
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0 20px 60px rgba(0,0,0,.08);
+}
+
+.auth-logo{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.auth-logo .mini-logo{
+    width:75px;
+    height:75px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#0d47a1;
+    color:var(--gold2);
+    font-size:30px;
+}
+
+.auth-logo h2{
+    margin-top:12px;
+}
+
+.auth-logo span{
+    color:var(--gold);
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:13px;
+    outline:none;
+    background:#fff;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(25,118,210,.10);
+}
+
+.gold-btn{
+    width:100%;
+    padding:14px;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#111;
+    font-weight:bold;
+    font-size:16px;
+}
+
+.switch-auth{
+    text-align:center;
+    margin-top:18px;
+    color:#777;
+    font-size:14px;
+}
+
+.switch-auth button{
+    background:none;
+    color:var(--gold);
+    font-weight:bold;
+}
+
+/* ================= APP ================= */
+
+#app{
+    min-height:100vh;
+}
+
+.sidebar{
+    position:fixed;
+    right:0;
+    top:0;
+    bottom:0;
+    width:260px;
+    background:#0d47a1;
+    color:#fff;
+    z-index:1000;
+    padding:20px 15px;
+    overflow-y:auto;
+    transition:.3s;
+}
+
+.brand{
+    padding:10px;
+    text-align:center;
+    border-bottom:1px solid #333;
+    margin-bottom:15px;
+}
+
+.brand h2{
+    color:#fff;
+}
+
+.brand span{
+    color:var(--gold2);
+}
+
+.student-mini{
+    background:#1565c0;
+    padding:13px;
+    border-radius:15px;
+    margin-bottom:15px;
+}
+
+.student-mini strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.student-mini small{
+    color:#bbb;
+}
+
+.nav-item{
+    width:100%;
+    background:transparent;
+    color:#ddd;
+    padding:13px;
+    border-radius:12px;
+    text-align:right;
+    margin-bottom:6px;
+    transition:.2s;
+    font-size:14px;
+}
+
+.nav-item:hover,
+.nav-item.active{
+    background:rgba(25,118,210,.15);
+    color:var(--gold2);
+}
+
+.logout{
+    color:#ff8c8c;
+}
+
+.main{
+    margin-right:260px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:70px;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    position:sticky;
+    top:0;
+    z-index:500;
+}
+
+.menu-btn{
+    display:none;
+    background:#0d47a1;
+    color:#fff;
+    padding:9px 12px;
+    border-radius:10px;
+}
+
+.search-global{
+    width:min(400px,60%);
+    position:relative;
+}
+
+.search-global input{
+    width:100%;
+    padding:11px 15px;
+    border:1px solid #ddd;
+    border-radius:15px;
+    outline:none;
+}
+
+.content{
+    padding:25px;
+    max-width:1500px;
+    margin:auto;
+}
+
+/* ================= GENERAL ================= */
+
+.hero{
+    background:
+        radial-gradient(circle at 80% 20%,rgba(100,181,246,.20),transparent 30%),
+        linear-gradient(135deg,#0d47a1,#1976d2);
+    color:#fff;
+    padding:35px;
+    border-radius:25px;
+    margin-bottom:25px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border:30px solid rgba(100,181,246,.10);
+    border-radius:50%;
+    left:-80px;
+    bottom:-130px;
+}
+
+.hero h1{
+    font-size:31px;
+    margin-bottom:10px;
+}
+
+.hero h1 span{
+    color:var(--gold2);
+}
+
+.hero p{
+    color:#ddd;
+    line-height:1.9;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:16px;
+}
+
+.card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+    transition:.25s;
+    box-shadow:0 8px 25px rgba(0,0,0,.03);
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.icon{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.card h3{
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#777;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:25px 0 15px;
+}
+
+.section-title h2{
+    font-size:22px;
+}
+
+.badge{
+    background:#e3f2fd;
+    color:#1565c0;
+    border:1px solid #90caf9;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.action-btn{
+    margin-top:15px;
+    background:#0d47a1;
+    color:#fff;
+    padding:10px 14px;
+    border-radius:10px;
+}
+
+.action-btn.gold{
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#111;
+}
+
+/* ================= SUBJECTS ================= */
+
+.subject-card{
+    cursor:pointer;
+}
+
+.subject-card .subject-icon{
+    width:55px;
+    height:55px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#e3f2fd;
+    font-size:27px;
+    margin-bottom:13px;
+}
+
+.track-title{
+    background:#fff;
+    border:1px solid var(--border);
+    padding:18px;
+    border-radius:18px;
+    margin-bottom:20px;
+}
+
+.track-title strong{
+    color:var(--gold);
+}
+
+/* ================= SUBJECT DETAIL ================= */
+
+.subject-header{
+    background:#0d47a1;
+    color:#fff;
+    border-radius:24px;
+    padding:28px;
+    margin-bottom:20px;
+}
+
+.subject-header h1{
+    color:var(--gold2);
+}
+
+.subject-header p{
+    color:#ccc;
+    margin-top:8px;
+}
+
+.subject-tools{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.tool-btn{
+    padding:15px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:15px;
+    text-align:right;
+    font-weight:bold;
+}
+
+.tool-btn:hover{
+    border-color:var(--gold);
+}
+
+.lesson-search{
+    background:#fff;
+    padding:15px;
+    border:1px solid var(--border);
+    border-radius:18px;
+    margin-bottom:20px;
+}
+
+.lesson-search input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    outline:none;
+}
+
+/* ================= FOUNDATION ================= */
+
+.foundation-box{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:15px;
+}
+
+.foundation-box h3{
+    color:#1565c0;
+    margin-bottom:10px;
+}
+
+.foundation-box ul{
+    padding-right:20px;
+}
+
+.foundation-box li{
+    margin:9px 0;
+    line-height:1.9;
+}
+
+.rule{
+    background:#0d47a1;
+    color:#fff;
+    border-radius:15px;
+    padding:17px;
+    margin-bottom:18px;
+    font-weight:bold;
+    text-align:center;
+}
+
+/* ================= YOUTUBE ================= */
+
+.youtube-box{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.youtube-search{
+    display:flex;
+    gap:8px;
+    margin-bottom:18px;
+}
+
+.youtube-search input{
+    flex:1;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:12px;
+}
+
+.youtube-search button{
+    background:#d00000;
+    color:#fff;
+    padding:0 18px;
+    border-radius:12px;
+}
+
+.video-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:12px;
+}
+
+.video-card{
+    border:1px solid #eee;
+    border-radius:15px;
+    padding:15px;
+}
+
+.video-card strong{
+    display:block;
+    margin-bottom:6px;
+}
+
+.video-card a{
+    display:inline-block;
+    margin-top:10px;
+    background:#d00000;
+    color:#fff;
+    padding:8px 12px;
+    border-radius:9px;
+    text-decoration:none;
+    font-size:13px;
+}
+
+/* ================= TEACHERS ================= */
+
+.teacher-card{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.teacher-subject{
+    color:#1565c0;
+    font-size:13px;
+}
+
+.teacher-card a{
+    color:#d00000;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* ================= LIBRARY ================= */
+
+.library-main{
+    text-align:center;
+    padding:35px;
+}
+
+.library-main .big-book{
+    font-size:65px;
+}
+
+.library-main h1{
+    margin:10px 0;
+}
+
+.drive-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:14px 22px;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#111;
+    text-decoration:none;
+    border-radius:13px;
+    font-weight:bold;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:9999;
+}
+
+.modal-content{
+    background:#fff;
+    width:min(800px,100%);
+    max-height:90vh;
+    overflow-y:auto;
+    border-radius:25px;
+    padding:25px;
+}
+
+.close-modal{
+    float:left;
+    background:#eee;
+    padding:8px 12px;
+    border-radius:10px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    background:#0d47a1;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:12px;
+    z-index:99999;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:850px){
+    .sidebar{
+        transform:translateX(100%);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-right:0;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 12px;
+        gap:10px;
+    }
+
+    .search-global{
+        width:55%;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .hero{
+        padding:25px 20px;
+    }
+
+    .hero h1{
+        font-size:25px;
+    }
+}
+
+@media(max-width:550px){
+    .intro-box h1{
+        font-size:30px;
+    }
+
+    .topbar{
+        height:65px;
+    }
+
+    .search-global{
+        width:48%;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .youtube-search{
+        flex-direction:column;
+    }
+
+    .youtube-search button{
+        padding:12px;
+    }
+}
+
+@media(max-width:380px){
+    .cards{
+        grid-template-columns:1fr;
+    }
+}
+
+/* ================= PRIME AI INSIDE PAGE ================= */
+.prime-ai-card{
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    border:1px solid rgba(25,118,210,.25);
+    background:linear-gradient(145deg,#ffffff,#eef7ff);
+}
+.prime-ai-card::after{
+    content:"AI";
+    position:absolute;
+    top:12px;
+    left:12px;
+    font-size:11px;
+    font-weight:900;
+    padding:5px 8px;
+    border-radius:999px;
+    background:#1976d2;
+    color:#fff;
+}
+.ai-float{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:62px;
+    height:62px;
+    border:0;
+    border-radius:50%;
+    background:linear-gradient(135deg,#1976d2,#0d47a1);
+    color:#fff;
+    font-size:28px;
+    cursor:pointer;
+    z-index:10000;
+    box-shadow:0 10px 30px rgba(13,71,161,.35);
+    transition:.2s;
+}
+.ai-float:hover{transform:translateY(-3px) scale(1.04)}
+.ai-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.62);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:14px;
+    z-index:10001;
+    backdrop-filter:blur(4px);
+}
+.ai-modal.hidden{display:none}
+.ai-window{
+    width:min(1050px,100%);
+    height:min(88vh,760px);
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 25px 80px rgba(0,0,0,.35);
+    display:flex;
+    flex-direction:column;
+}
+.ai-head{
+    min-height:70px;
+    padding:12px 18px;
+    background:linear-gradient(135deg,#1976d2,#0d47a1);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+.ai-head-info{display:flex;align-items:center;gap:12px}
+.ai-logo{
+    width:45px;height:45px;border-radius:14px;
+    display:grid;place-items:center;background:rgba(255,255,255,.18);font-size:25px;
+}
+.ai-head h3{margin:0;font-size:19px}
+.ai-head small{opacity:.85}
+.ai-close{
+    border:0;background:rgba(255,255,255,.16);color:#fff;
+    width:40px;height:40px;border-radius:12px;cursor:pointer;font-size:18px;
+}
+.ai-frame{
+    width:100%;height:100%;border:0;background:#fff;flex:1;
+}
+@media(max-width:600px){
+    .ai-float{right:15px;bottom:15px;width:56px;height:56px}
+    .ai-window{height:92vh;border-radius:18px}
+    .ai-head{min-height:62px}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= INTRO ================= -->
+
+<div id="intro">
+    <div class="intro-box">
+        <div class="logo-circle">🎓</div>
+        <div class="intro-badge">✨ أهلاً بيك في مستقبلك</div>
+        <h1>Third Secondary <span>Prime</span></h1>
+        <p>منصتك الشاملة للثانوية العامة والأزهرية 2027</p>
+        <div class="intro-sub">ذاكر • نظم وقتك • تابع تقدمك • وصل لهدفك 🚀</div>
+        <div class="loading">
+            <div></div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= AUTH ================= -->
+
+<section id="auth" class="hidden">
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            <div class="mini-logo">🎓</div>
+            <h2>Third Secondary <span>Prime</span></h2>
+            <p>ابدأ رحلتك في الثانوية</p>
+        </div>
+
+        <div id="registerForm">
+
+            <div class="form-group">
+                <label>👤 اسم الطالب</label>
+                <input id="regName" type="text" placeholder="اكتب اسمك">
+            </div>
+
+            <div class="form-group">
+                <label>📧 البريد الإلكتروني</label>
+                <input id="regEmail" type="email" placeholder="example@gmail.com">
+            </div>
+
+            <div class="form-group">
+                <label>🔐 كلمة المرور</label>
+                <input id="regPass" type="password" placeholder="كلمة المرور">
+            </div>
+
+            <div class="form-group">
+                <label>🎓 الشعبة</label>
+                <select id="regTrack">
+                    <option value="">اختر الشعبة</option>
+                    <option value="science">🧬 علمي علوم</option>
+                    <option value="math">📐 علمي رياضة</option>
+                    <option value="literary">📚 أدبي</option>
+                    <option value="azhar">🕌 أزهري</option>
+                </select>
+            </div>
+
+            <button class="gold-btn" onclick="register()">
+                إنشاء الحساب 🚀
+            </button>
+
+            <div class="switch-auth">
+                عندك حساب؟
+                <button onclick="showLogin()">تسجيل الدخول</button>
+            </div>
+
+        </div>
+
+        <div id="loginForm" class="hidden">
+
+            <div class="form-group">
+                <label>📧 البريد الإلكتروني</label>
+                <input id="loginEmail" type="email" placeholder="البريد الإلكتروني">
+            </div>
+
+            <div class="form-group">
+                <label>🔐 كلمة المرور</label>
+                <input id="loginPass" type="password" placeholder="كلمة المرور">
+            </div>
+
+            <button class="gold-btn" onclick="login()">
+                دخول المنصة 🚀
+            </button>
+
+            <div class="switch-auth">
+                لسه معندكش حساب؟
+                <button onclick="showRegister()">إنشاء حساب</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= APP ================= -->
+
+<section id="app" class="hidden">
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <h2>Third Secondary</h2>
+            <span>Prime ✨</span>
+        </div>
+
+        <div class="student-mini">
+            <strong id="sideName">طالب</strong>
+            <small id="sideTrack">الشعبة</small>
+        </div>
+
+        <button class="nav-item active" onclick="showPage('home',this)">
+            🏠 الرئيسية
+        </button>
+
+        <button class="nav-item" onclick="showPage('subjects',this)">
+            📚 المواد
+        </button>
+
+        <button class="nav-item" onclick="showPage('teachers',this)">
+            👨‍🏫 المدرسين
+        </button>
+
+        <button class="nav-item" onclick="showPage('library',this)">
+            📖 المكتبة
+        </button>
+
+        <button class="nav-item" onclick="openExams()">
+            📝 الامتحانات
+        </button>
+
+        <button class="nav-item" onclick="showPage('plan',this)">
+            📅 خطة المذاكرة
+        </button>
+
+        <button class="nav-item" onclick="showPage('timer',this)">
+            ⏱️ المؤقت
+        </button>
+
+        <button class="nav-item" onclick="showPage('groups',this)">
+            👥 المجتمع
+        </button>
+
+        <button class="nav-item" onclick="showPage('profile',this)">
+            👤 حسابي
+        </button>
+
+        <button class="nav-item logout" onclick="logout()">
+            🚪 تسجيل الخروج
+        </button>
+
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+
+            <div class="search-global">
+                <input
+                    id="globalSearch"
+                    type="text"
+                    placeholder="🔎 ابحث عن مادة أو مدرس..."
+                    onkeyup="globalSearch()"
+                >
+            </div>
+
+            <div>
+                🎓 <b>2027</b>
+            </div>
+
+        </header>
+
+        <div class="content">
+
+            <!-- HOME -->
+
+            <section id="page-home">
+
+                <div class="hero">
+
+                    <h1>
+                        أهلاً يا <span id="welcomeName">طالب</span> 👋
+                    </h1>
+
+                    <p>
+                        نورت Third Secondary Prime.
+                        هنا هتلاقي التأسيس، شرح المواد، مدرسين YouTube،
+                        الكتب، الامتحانات وخطة المذاكرة في مكان واحد.
+                    </p>
+
+                </div>
+
+                <div class="section-title">
+                    <h2>🚀 اختصارات سريعة</h2>
+                </div>
+
+                <div class="cards">
+
+                    <div class="card" onclick="showPage('subjects')">
+                        <div class="icon">📚</div>
+                        <h3>المواد</h3>
+                        <p>ادخل على مواد شعبتك وشوف التأسيس والشرح.</p>
+                    </div>
+
+                    <div class="card" onclick="showPage('library')">
+                        <div class="icon">📖</div>
+                        <h3>مكتبة الكتب</h3>
+                        <p>كتب ومراجعات كل الشعب في مكتبة واحدة.</p>
+                    </div>
+
+                    <div class="card" onclick="openExams()">
+                        <div class="icon">📝</div>
+                        <h3>الامتحانات</h3>
+                        <p>ادخل على منصة الامتحانات.</p>
+                    </div>
+
+                    <div class="card" onclick="showPage('teachers')">
+                        <div class="icon">👨‍🏫</div>
+                        <h3>المدرسين</h3>
+                        <p>مدرسين مشهورين وترشيحات YouTube.</p>
+                    </div>
+
+                    <div class="card prime-ai-card" onclick="openPrimeAI()">
+                        <div class="icon">🤖</div>
+                        <h3>Prime AI</h3>
+                        <p>اسأل مساعدك الدراسي عن المواد والشرح والحل داخل نفس الصفحة.</p>
+                        <button class="action-btn gold" type="button" onclick="event.stopPropagation();openPrimeAI()">
+                            💬 افتح Prime AI
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="section-title">
+                    <h2>⭐ أهم أقسام المنصة</h2>
+                </div>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <div class="icon">🧠</div>
+                        <h3>التأسيس</h3>
+                        <p>
+                            أساسيات كل مادة قبل الدخول في المنهج.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">🎥</div>
+                        <h3>شرح YouTube</h3>
+                        <p>
+                            ابحث عن شرح الدرس مباشرة على YouTube.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">📅</div>
+                        <h3>الخطة</h3>
+                        <p>
+                            نظم يومك ومراجعتك باستمرار.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">⏱️</div>
+                        <h3>المؤقت</h3>
+                        <p>
+                            ذاكر بنظام جلسات التركيز.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- SUBJECTS -->
+
+            <section id="page-subjects" class="hidden">
+
+                <div class="track-title">
+                    <h2>📚 مواد <strong id="trackTitle">شعبتك</strong></h2>
+                    <p>
+                        اختار المادة وهتلاقي التأسيس + شرح YouTube + المدرسين.
+                    </p>
+                </div>
+
+                <div id="subjectsGrid" class="cards"></div>
+
+            </section>
+
+            <!-- SUBJECT DETAIL -->
+
+            <section id="page-subject-detail" class="hidden">
+
+                <div id="subjectDetail"></div>
+
+            </section>
+
+            <!-- TEACHERS -->
+
+            <section id="page-teachers" class="hidden">
+
+                <div class="hero">
+                    <h1>👨‍🏫 مدرسين YouTube</h1>
+                    <p>
+                        ترشيحات لمدرسين معروفين، وتقدر تبحث عن شرح أي درس
+                        مباشرة من المنصة.
+                    </p>
+                </div>
+
+                <div id="teachersGrid" class="cards"></div>
+
+            </section>
+
+            <!-- LIBRARY -->
+
+            <section id="page-library" class="hidden">
+
+                <div class="card library-main">
+
+                    <div class="big-book">📚</div>
+
+                    <h1>مكتبة الكتب</h1>
+
+                    <p>
+                        مكتبة كتب ومراجعات لكل الشعب:
+                        علمي علوم، علمي رياضة، أدبي وأزهري.
+                    </p>
+
+                    <a
+                        class="drive-btn"
+                        href="https://drive.google.com/drive/folders/11wlXrhDApLHsY4uVo3v8itMznav0XgdN"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        📖 فتح مكتبة الكتب
+                    </a>
+
+                </div>
+
+                <div class="section-title">
+                    <h2>📂 تقسيم المكتبة</h2>
+                </div>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <div class="icon">🧬</div>
+                        <h3>علمي علوم</h3>
+                        <p>كتب الأحياء والكيمياء والفيزياء والرياضيات والعربي والإنجليزي.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">📐</div>
+                        <h3>علمي رياضة</h3>
+                        <p>كتب الرياضيات والفيزياء والكيمياء وباقي المواد.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">📚</div>
+                        <h3>أدبي</h3>
+                        <p>كتب العربي والإنجليزي والتاريخ والجغرافيا والإحصاء وغيرها.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">🕌</div>
+                        <h3>أزهري</h3>
+                        <p>كتب القرآن والحديث والتفسير والفقه والتوحيد والمواد الثقافية.</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- PLAN -->
+
+            <section id="page-plan" class="hidden">
+
+                <div class="hero">
+                    <h1>📅 خطة المذاكرة</h1>
+                    <p>
+                        خليك ثابت على نظام بسيط بدل المذاكرة العشوائية.
+                    </p>
+                </div>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <div class="icon">🌅</div>
+                        <h3>الصبح</h3>
+                        <p>مراجعة سريعة لدرس قديم + مادة تحتاج تركيز.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">☀️</div>
+                        <h3>الظهر</h3>
+                        <p>شرح درس جديد ثم كتابة النقاط المهمة.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">🌇</div>
+                        <h3>العصر</h3>
+                        <p>حل تدريبات وتطبيق على الدرس.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">🌙</div>
+                        <h3>الليل</h3>
+                        <p>مراجعة الأخطاء والقوانين والكلمات.</p>
+                    </div>
+
+                </div>
+
+                <div class="foundation-box">
+                    <h3>🔥 قاعدة مهمة</h3>
+                    <p>
+                        افهم الدرس → اقفله → حاول تشرحه لنفسك →
+                        حل بإيدك → راجع أخطاءك.
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- TIMER -->
+
+            <section id="page-timer" class="hidden">
+
+                <div class="hero">
+                    <h1>⏱️ مؤقت المذاكرة</h1>
+                    <p>جلسة تركيز بدون تشتت.</p>
+                </div>
+
+                <div class="card" style="text-align:center">
+
+                    <div id="timerDisplay"
+                         style="font-size:70px;font-weight:bold;margin:20px">
+                        25:00
+                    </div>
+
+                    <button class="action-btn gold" onclick="startTimer()">
+                        ▶️ ابدأ
+                    </button>
+
+                    <button class="action-btn" onclick="pauseTimer()">
+                        ⏸️ إيقاف
+                    </button>
+
+                    <button class="action-btn" onclick="resetTimer()">
+                        🔄 إعادة
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- GROUPS -->
+
+            <section id="page-groups" class="hidden">
+
+                <div class="hero">
+                    <h1>👥 مجتمع Third Secondary Prime</h1>
+                    <p>
+                        تابع القناة وادخل جروبات المنصة.
+                    </p>
+                </div>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <div class="icon">💬</div>
+                        <h3>جروب 1</h3>
+                        <p>رابط الجروب قابل للتعديل من الكود.</p>
+                        <button class="action-btn" onclick="openGroup(1)">
+                            دخول الجروب
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">💬</div>
+                        <h3>جروب 2</h3>
+                        <p>رابط الجروب قابل للتعديل من الكود.</p>
+                        <button class="action-btn" onclick="openGroup(2)">
+                            دخول الجروب
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">📢</div>
+                        <h3>قناة WhatsApp</h3>
+                        <p>تابع آخر أخبار ومحتوى المنصة.</p>
+                        <button class="action-btn gold" onclick="openChannel()">
+                            فتح القناة
+                        </button>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- PROFILE -->
+
+            <section id="page-profile" class="hidden">
+
+                <div class="hero">
+                    <h1>👤 حسابي</h1>
+                    <p>بيانات حسابك على Third Secondary Prime.</p>
+                </div>
+
+                <div class="card">
+
+                    <h3>👤 الاسم</h3>
+                    <p id="profileName"></p>
+
+                    <br>
+
+                    <h3>📧 البريد</h3>
+                    <p id="profileEmail"></p>
+
+                    <br>
+
+                    <h3>🎓 الشعبة</h3>
+                    <p id="profileTrack"></p>
+
+                    <br>
+
+                    <h3>✨ المنصة</h3>
+                    <p>Third Secondary Prime</p>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</section>
+
+<!-- ================= MODAL ================= -->
+
+<div id="modal" class="modal hidden">
+
+    <div class="modal-content">
+
+        <button class="close-modal" onclick="closeModal()">✖</button>
+
+        <div id="modalBody"></div>
+
+    </div>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+<!-- ================= PRIME AI ================= -->
+<button class="ai-float" type="button" onclick="openPrimeAI()" aria-label="فتح Prime AI">🤖</button>
+
+<div id="primeAiModal" class="ai-modal hidden" onclick="closePrimeAIMaybe(event)">
+    <div class="ai-window" role="dialog" aria-modal="true" aria-label="Prime AI">
+        <div class="ai-head">
+            <div class="ai-head-info">
+                <div class="ai-logo">🤖</div>
+                <div>
+                    <h3>Prime AI</h3>
+                    <small>مساعدك الدراسي — داخل Third Secondary Prime</small>
+                </div>
+            </div>
+            <button class="ai-close" type="button" onclick="closePrimeAI()" aria-label="إغلاق">✕</button>
+        </div>
+        <iframe
+            id="primeAiFrame"
+            class="ai-frame"
+            title="Prime AI"
+            src="about:blank"
+            loading="lazy"
+            allow="clipboard-read; clipboard-write">
+        </iframe>
+    </div>
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   SETTINGS
+===================================================== */
+
+const EXAMS_SITE =
+"https://drive.google.com/drive/folders/1sl58Ee3CvM1W6S1YHxeiLI6ceBXWqE9g?usp=drive_link";
+
+const LIBRARY_LINK =
+"https://drive.google.com/drive/folders/11wlXrhDApLHsY4uVo3v8itMznav0XgdN";
+
+const GROUP_1 =
+"https://chat.whatsapp.com/";
+
+const GROUP_2 =
+"https://chat.whatsapp.com/";
+
+const CHANNEL =
+"https://whatsapp.com/channel/0029Vb5p6Pd8KMqieGUwrG01";
+
+
+/* =====================================================
+   SUBJECT DATA
+===================================================== */
+
+const SUBJECTS = {
+
+science:[
+    {
+        id:"arabic",
+        name:"اللغة العربية",
+        icon:"📖",
+        teachers:["محمد صلاح","رضا الفاروق","وليد محسن"],
+        foundation:[
+            "النحو: أقسام الكلام والجملة الاسمية والفعلية وعلامات الإعراب.",
+            "البلاغة: التشبيه والاستعارة والكناية والمجاز.",
+            "الأدب: العصور الأدبية والخصائص وأشهر الأدباء.",
+            "النصوص: فهم النص قبل الحفظ واستخراج الأفكار والجماليات.",
+            "القراءة: الفكرة العامة والأفكار الفرعية والمفردات.",
+            "الإنشاء: مقدمة وعرض وخاتمة وترتيب الأفكار."
+        ]
+    },
+
+    {
+        id:"english",
+        name:"اللغة الإنجليزية",
+        icon:"🇬🇧",
+        teachers:["محمد عبدالله","أحمد أبو المجد","عبدالحميد حامد"],
+        foundation:[
+            "Vocabulary: الكلمات الأساسية واستخدام الكلمة داخل جملة.",
+            "Grammar: الأزمنة الأساسية وتكوين الجملة.",
+            "Reading: فهم الفكرة العامة والكلمات المفتاحية.",
+            "Translation: فهم الزمن والمعنى قبل الترجمة.",
+            "Writing: المقدمة والفكرة الأساسية والخاتمة.",
+            "تدريب يومي على الكلمات والقواعد والقراءة."
+        ]
+    },
+
+    {
+        id:"physics",
+        name:"الفيزياء",
+        icon:"⚡",
+        teachers:["محمد عبد المعبود","محمود مجدي","محمد سامح"],
+        foundation:[
+            "الوحدات والقياسات والتحويلات.",
+            "فهم الكميات الفيزيائية والقوانين.",
+            "التعامل مع الرموز والوحدات.",
+            "حل المسألة من خلال تحديد المعطيات والمطلوب.",
+            "التدريب على التعويض الصحيح في القانون.",
+            "الكهرباء والمقاومة والأسلاك.",
+            "مراجعة خطوات الحل وعدم الاعتماد على حفظ الناتج."
+        ]
+    },
+
+    {
+        id:"chemistry",
+        name:"الكيمياء",
+        icon:"🧪",
+        teachers:["خالد صقر","محمد عبد الجواد","محمد بكري"],
+        foundation:[
+            "تركيب الذرة والجدول الدوري.",
+            "الروابط الكيميائية.",
+            "المول والحسابات الكيميائية الأساسية.",
+            "كتابة وموازنة المعادلات الكيميائية.",
+            "فهم ظروف حدوث التفاعل.",
+            "الربط بين المتفاعلات والنواتج.",
+            "التدريب على المسائل الكيميائية."
+        ]
+    },
+
+    {
+        id:"biology",
+        name:"الأحياء",
+        icon:"🧬",
+        teachers:["عماد بدوي","أحمد سمير","محمد أبو زيد"],
+        foundation:[
+            "أساسيات الخلية وتركيبها.",
+            "وظيفة كل جزء في الخلية.",
+            "فهم الرسومات والأشكال.",
+            "تكوين المقارنات والجداول.",
+            "حفظ المصطلحات بعد فهم معناها.",
+            "ربط أجزاء الجسم بوظائفها.",
+            "التدريب على أسئلة الفهم والاختيار."
+        ]
+    },
+
+    {
+        id:"math",
+        name:"الرياضيات",
+        icon:"📐",
+        teachers:["أحمد الفاضل","محمد إبراهيم","أحمد سرحان"],
+        foundation:[
+            "العمليات الحسابية والكسور.",
+            "الأسس والجذور.",
+            "المعادلات.",
+            "الدوال الأساسية.",
+            "أساسيات التفاضل.",
+            "الاشتقاق الضمني.",
+            "الاشتقاق البارامتري.",
+            "أساسيات التكامل.",
+            "التدريب على المسائل المتدرجة."
+        ]
+    }
+],
+
+math:[
+    {
+        id:"arabic",
+        name:"اللغة العربية",
+        icon:"📖",
+        teachers:["محمد صلاح","رضا الفاروق","وليد محسن"],
+        foundation:[
+            "النحو: أقسام الكلام والجملة الاسمية والفعلية.",
+            "علامات الإعراب.",
+            "البلاغة والتشبيه والاستعارة والكناية.",
+            "الأدب والعصور الأدبية.",
+            "فهم النصوص قبل الحفظ.",
+            "القراءة والإنشاء."
+        ]
+    },
+
+    {
+        id:"english",
+        name:"اللغة الإنجليزية",
+        icon:"🇬🇧",
+        teachers:["محمد عبدالله","أحمد أبو المجد","عبدالحميد حامد"],
+        foundation:[
+            "Vocabulary.",
+            "Basic Grammar.",
+            "Reading.",
+            "Translation.",
+            "Writing.",
+            "التدريب اليومي."
+        ]
+    },
+
+    {
+        id:"physics",
+        name:"الفيزياء",
+        icon:"⚡",
+        teachers:["محمد عبد المعبود","محمود مجدي","محمد سامح"],
+        foundation:[
+            "الوحدات والقياسات.",
+            "القوانين الفيزيائية.",
+            "التحويلات.",
+            "المقاومة والأسلاك.",
+            "الكهرباء.",
+            "حل المسائل خطوة بخطوة."
+        ]
+    },
+
+    {
+        id:"chemistry",
+        name:"الكيمياء",
+        icon:"🧪",
+        teachers:["خالد صقر","محمد عبد الجواد","محمد بكري"],
+        foundation:[
+            "الذرة والجدول الدوري.",
+            "الروابط.",
+            "المول.",
+            "المعادلات.",
+            "الحسابات الكيميائية.",
+            "فهم التفاعلات."
+        ]
+    },
+
+    {
+        id:"math",
+        name:"الرياضيات",
+        icon:"📐",
+        teachers:["أحمد الفاضل","محمد إبراهيم","أحمد سرحان"],
+        foundation:[
+            "الجبر الأساسي.",
+            "الدوال.",
+            "التفاضل.",
+            "الاشتقاق.",
+            "الاشتقاق الضمني.",
+            "الاشتقاق البارامتري.",
+            "التكامل.",
+            "حل المسائل."
+        ]
+    }
+],
+
+literary:[
+    {
+        id:"arabic",
+        name:"اللغة العربية",
+        icon:"📖",
+        teachers:["محمد صلاح","رضا الفاروق","وليد محسن"],
+        foundation:[
+            "النحو.",
+            "البلاغة.",
+            "الأدب.",
+            "النصوص.",
+            "القراءة.",
+            "الإنشاء."
+        ]
+    },
+
+    {
+        id:"english",
+        name:"اللغة الإنجليزية",
+        icon:"🇬🇧",
+        teachers:["محمد عبدالله","أحمد أبو المجد","عبدالحميد حامد"],
+        foundation:[
+            "Vocabulary.",
+            "Grammar.",
+            "Reading.",
+            "Translation.",
+            "Writing."
+        ]
+    },
+
+    {
+        id:"history",
+        name:"التاريخ",
+        icon:"🏛️",
+        teachers:["محمد عبد المنعم","حسن النجار","محمد معروف"],
+        foundation:[
+            "ترتيب الأحداث زمنيًا.",
+            "الشخصيات وأهم أعمالها.",
+            "أسباب ونتائج الأحداث.",
+            "الربط بين الأحداث.",
+            "الجداول الزمنية.",
+            "حل أسئلة علل والمقارنات."
+        ]
+    },
+
+    {
+        id:"geography",
+        name:"الجغرافيا",
+        icon:"🌍",
+        teachers:["أشرف صالح","محمد فتحي","أحمد سمير"],
+        foundation:[
+            "الاتجاهات.",
+            "قراءة الخرائط.",
+            "قراءة الجداول.",
+            "الأسباب والنتائج.",
+            "المقارنات.",
+            "تحليل البيانات الجغرافية."
+        ]
+    },
+
+    {
+        id:"statistics",
+        name:"الإحصاء",
+        icon:"📊",
+        teachers:["محمد النجار","أحمد عبد السلام"],
+        foundation:[
+            "المتوسط الحسابي.",
+            "الوسيط والمنوال.",
+            "الجداول التكرارية.",
+            "الاحتمالات الأساسية.",
+            "قراءة البيانات.",
+            "حل المسائل بالتدرج."
+        ]
+    }
+],
+
+azhar:[
+    {
+        id:"quran",
+        name:"القرآن الكريم",
+        icon:"📖",
+        teachers:["مدرسو القرآن بالأزهر"],
+        foundation:[
+            "القراءة الصحيحة.",
+            "مراجعة المحفوظ.",
+            "معرفة معاني الكلمات.",
+            "الربط بين الآيات.",
+            "التسميع المستمر."
+        ]
+    },
+
+    {
+        id:"hadith",
+        name:"الحديث الشريف",
+        icon:"🕌",
+        teachers:["مدرسو الحديث بالأزهر"],
+        foundation:[
+            "قراءة الحديث.",
+            "فهم المعنى.",
+            "معرفة المفردات.",
+            "استخراج الفوائد.",
+            "ربط الحديث بالحياة.",
+            "التسميع والمراجعة."
+        ]
+    },
+
+    {
+        id:"tafsir",
+        name:"التفسير",
+        icon:"📜",
+        teachers:["مدرسو التفسير بالأزهر"],
+        foundation:[
+            "قراءة الآيات.",
+            "فهم المعنى العام.",
+            "معاني الكلمات.",
+            "أسباب النزول إن وجدت.",
+            "استخراج الفوائد والأحكام."
+        ]
+    },
+
+    {
+        id:"fiqh",
+        name:"الفقه",
+        icon:"⚖️",
+        teachers:["مدرسو الفقه بالأزهر"],
+        foundation:[
+            "فهم الحكم.",
+            "معرفة الدليل.",
+            "الشروط.",
+            "الأركان.",
+            "المبطلات.",
+            "المقارنات بين المسائل."
+        ]
+    },
+
+    {
+        id:"tawhid",
+        name:"التوحيد",
+        icon:"🕌",
+        teachers:["مدرسو التوحيد بالأزهر"],
+        foundation:[
+            "فهم العقيدة.",
+            "التعريفات.",
+            "الأدلة.",
+            "الربط بين الأفكار.",
+            "المقارنات."
+        ]
+    },
+
+    {
+        id:"nahw",
+        name:"النحو",
+        icon:"✍️",
+        teachers:["مدرسو النحو بالأزهر"],
+        foundation:[
+            "أقسام الكلام.",
+            "الجملة الاسمية.",
+            "الجملة الفعلية.",
+            "علامات الإعراب.",
+            "الإعراب والتطبيق."
+        ]
+    },
+
+    {
+        id:"sarf",
+        name:"الصرف",
+        icon:"🔤",
+        teachers:["مدرسو الصرف بالأزهر"],
+        foundation:[
+            "الميزان الصرفي.",
+            "تصريف الأفعال.",
+            "المجرد والمزيد.",
+            "المشتقات.",
+            "التطبيق على الكلمات."
+        ]
+    },
+
+    {
+        id:"balagha",
+        name:"البلاغة",
+        icon:"✨",
+        teachers:["مدرسو البلاغة بالأزهر"],
+        foundation:[
+            "التشبيه.",
+            "الاستعارة.",
+            "الكناية.",
+            "المجاز.",
+            "استخراج الجمال.",
+            "معرفة أثر الأسلوب."
+        ]
+    },
+
+    {
+        id:"literature",
+        name:"الأدب والنصوص",
+        icon:"📚",
+        teachers:["مدرسو الأدب بالأزهر"],
+        foundation:[
+            "العصور الأدبية.",
+            "الشعراء.",
+            "خصائص كل عصر.",
+            "فهم النص.",
+            "الأفكار والجماليات."
+        ]
+    },
+
+    {
+        id:"composition",
+        name:"الإنشاء",
+        icon:"📝",
+        teachers:["مدرسو اللغة العربية بالأزهر"],
+        foundation:[
+            "المقدمة.",
+            "عرض الأفكار.",
+            "الخاتمة.",
+            "الترابط.",
+            "سلامة اللغة.",
+            "علامات الترقيم."
+        ]
+    },
+
+    {
+        id:"english",
+        name:"اللغة الإنجليزية",
+        icon:"🇬🇧",
+        teachers:["محمد عبدالله","أحمد أبو المجد"],
+        foundation:[
+            "Vocabulary.",
+            "Grammar.",
+            "Reading.",
+            "Translation.",
+            "Writing."
+        ]
+    }
+]};
+
+
+/* =====================================================
+   TRACK NAMES
+===================================================== */
+
+const TRACK_NAMES = {
+    science:"🧬 علمي علوم",
+    math:"📐 علمي رياضة",
+    literary:"📚 أدبي",
+    azhar:"🕌 أزهري"
+};
+
+
+/* =====================================================
+   TEACHERS
+===================================================== */
+
+const ALL_TEACHERS = [
+
+    {
+        name:"محمد صلاح",
+        subject:"اللغة العربية",
+        icon:"📖",
+        search:"محمد صلاح اللغة العربية ثالثة ثانوي"
+    },
+
+    {
+        name:"رضا الفاروق",
+        subject:"اللغة العربية",
+        icon:"📖",
+        search:"رضا الفاروق عربي ثالثة ثانوي"
+    },
+
+    {
+        name:"محمد عبدالله",
+        subject:"اللغة الإنجليزية",
+        icon:"🇬🇧",
+        search:"محمد عبدالله انجليزي ثالثة ثانوي"
+    },
+
+    {
+        name:"أحمد أبو المجد",
+        subject:"اللغة الإنجليزية",
+        icon:"🇬🇧",
+        search:"أحمد أبو المجد انجليزي ثالثة ثانوي"
+    },
+
+    {
+        name:"خالد صقر",
+        subject:"الكيمياء",
+        icon:"🧪",
+        search:"خالد صقر كيمياء ثالثة ثانوي"
+    },
+
+    {
+        name:"محمد عبد الجواد",
+        subject:"الكيمياء",
+        icon:"🧪",
+        search:"محمد عبد الجواد كيمياء ثالثة ثانوي"
+    },
+
+    {
+        name:"محمد عبد المعبود",
+        subject:"الفيزياء",
+        icon:"⚡",
+        search:"محمد عبد المعبود فيزياء ثالثة ثانوي"
+    },
+
+    {
+        name:"محمود مجدي",
+        subject:"الفيزياء",
+        icon:"⚡",
+        search:"محمود مجدي فيزياء ثالثة ثانوي"
+    },
+
+    {
+        name:"عماد بدوي",
+        subject:"الأحياء",
+        icon:"🧬",
+        search:"عماد بدوي أحياء ثالثة ثانوي"
+    },
+
+    {
+        name:"أحمد سمير",
+        subject:"الأحياء",
+        icon:"🧬",
+        search:"أحمد سمير أحياء ثالثة ثانوي"
+    },
+
+    {
+        name:"محمد عبد المنعم",
+        subject:"التاريخ",
+        icon:"🏛️",
+        search:"محمد عبد المنعم تاريخ ثالثة ثانوي"
+    },
+
+    {
+        name:"حسن النجار",
+        subject:"التاريخ",
+        icon:"🏛️",
+        search:"حسن النجار تاريخ ثالثة ثانوي"
+    },
+
+    {
+        name:"محمد معروف",
+        subject:"الجغرافيا",
+        icon:"🌍",
+        search:"محمد معروف جغرافيا ثالثة ثانوي"
+    }
+
+];
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+let currentUser = null;
+
+function getUsers(){
+    return JSON.parse(localStorage.getItem("tsp_users") || "[]");
+}
+
+function saveUsers(users){
+    localStorage.setItem("tsp_users",JSON.stringify(users));
+}
+
+function register(){
+
+    const name =
+        document.getElementById("regName").value.trim();
+
+    const email =
+        document.getElementById("regEmail").value.trim();
+
+    const pass =
+        document.getElementById("regPass").value;
+
+    const track =
+        document.getElementById("regTrack").value;
+
+    if(!name || !email || !pass || !track){
+        toast("⚠️ املأ كل البيانات");
+        return;
+    }
+
+    const users = getUsers();
+
+    if(users.some(u => u.email === email)){
+        toast("⚠️ البريد مستخدم بالفعل");
+        return;
+    }
+
+    const user = {
+        id:Date.now(),
+        name,
+        email,
+        pass,
+        track
+    };
+
+    users.push(user);
+
+    saveUsers(users);
+
+    localStorage.setItem("tsp_current",email);
+
+    currentUser = user;
+
+    openApp();
+
+    toast("🎉 تم إنشاء الحساب بنجاح");
+
+}
+
+
+function login(){
+
+    const email =
+        document.getElementById("loginEmail").value.trim();
+
+    const pass =
+        document.getElementById("loginPass").value;
+
+    const users = getUsers();
+
+    const user =
+        users.find(
+            u => u.email === email && u.pass === pass
+        );
+
+    if(!user){
+        toast("❌ البريد أو كلمة المرور غير صحيحة");
+        return;
+    }
+
+    currentUser = user;
+
+    localStorage.setItem("tsp_current",email);
+
+    openApp();
+
+    toast("👋 أهلاً بيك");
+
+}
+
+
+function logout(){
+
+    localStorage.removeItem("tsp_current");
+
+    currentUser = null;
+
+    document.getElementById("app").classList.add("hidden");
+
+    document.getElementById("auth").classList.remove("hidden");
+
+}
+
+
+function showLogin(){
+
+    document.getElementById("registerForm").classList.add("hidden");
+
+    document.getElementById("loginForm").classList.remove("hidden");
+
+}
+
+
+function showRegister(){
+
+    document.getElementById("loginForm").classList.add("hidden");
+
+    document.getElementById("registerForm").classList.remove("hidden");
+
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+function openApp(){
+
+    document.getElementById("auth").classList.add("hidden");
+
+    document.getElementById("app").classList.remove("hidden");
+
+    updateUserUI();
+
+    showPage("home");
+
+}
+
+
+function updateUserUI(){
+
+    if(!currentUser) return;
+
+    const track =
+        TRACK_NAMES[currentUser.track] || "";
+
+    document.getElementById("welcomeName").textContent =
+        currentUser.name;
+
+    document.getElementById("sideName").textContent =
+        currentUser.name;
+
+    document.getElementById("sideTrack").textContent =
+        track;
+
+    document.getElementById("trackTitle").textContent =
+        track;
+
+    document.getElementById("profileName").textContent =
+        currentUser.name;
+
+    document.getElementById("profileEmail").textContent =
+        currentUser.email;
+
+    document.getElementById("profileTrack").textContent =
+        track;
+
+    renderSubjects();
+
+    renderTeachers();
+
+}
+
+
+/* =====================================================
+   PAGE SYSTEM
+===================================================== */
+
+function showPage(page,button){
+
+    document
+        .querySelectorAll("[id^='page-']")
+        .forEach(el => el.classList.add("hidden"));
+
+    const target =
+        document.getElementById("page-" + page);
+
+    if(target){
+        target.classList.remove("hidden");
+    }
+
+    if(button){
+
+        document
+            .querySelectorAll(".nav-item")
+            .forEach(b => b.classList.remove("active"));
+
+        button.classList.add("active");
+
+    }
+
+    if(window.innerWidth <= 850){
+        document
+            .getElementById("sidebar")
+            .classList.remove("open");
+    }
+
+}
+
+
+/* =====================================================
+   SUBJECTS
+===================================================== */
+
+function renderSubjects(){
+
+    if(!currentUser) return;
+
+    const grid =
+        document.getElementById("subjectsGrid");
+
+    const list =
+        SUBJECTS[currentUser.track] || [];
+
+    grid.innerHTML =
+        list.map(subject => `
+
+            <div class="card subject-card"
+                 onclick="openSubject('${subject.id}')">
+
+                <div class="subject-icon">
+                    ${subject.icon}
+                </div>
+
+                <h3>${subject.name}</h3>
+
+                <p>
+                    📚 التأسيس<br>
+                    🎥 شرح YouTube<br>
+                    👨‍🏫 مدرسين
+                </p>
+
+                <button class="action-btn gold">
+                    دخول المادة →
+                </button>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+/* =====================================================
+   SUBJECT DETAIL
+===================================================== */
+
+function openSubject(id){
+
+    const list =
+        SUBJECTS[currentUser.track] || [];
+
+    const subject =
+        list.find(s => s.id === id);
+
+    if(!subject) return;
+
+    showPage("subject-detail");
+
+    const box =
+        document.getElementById("subjectDetail");
+
+    const foundation =
+        subject.foundation
+        .map(x => `<li>${x}</li>`)
+        .join("");
+
+    const teachers =
+        subject.teachers
+        .map(name => `
+            <div class="video-card">
+
+                <strong>👨‍🏫 ${name}</strong>
+
+                <span>
+                    شرح ${subject.name}
+                </span>
+
+                <a
+                    href="${youtubeSearch(
+                        name + " " + subject.name + " ثالثة ثانوي"
+                    )}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    ▶️ مشاهدة على YouTube
+                </a>
+
+            </div>
+        `)
+        .join("");
+
+    box.innerHTML = `
+
+        <div class="subject-header">
+
+            <h1>
+                ${subject.icon} ${subject.name}
+            </h1>
+
+            <p>
+                ${TRACK_NAMES[currentUser.track]}
+                — Third Secondary Prime
+            </p>
+
+        </div>
+
+        <div class="subject-tools">
+
+            <button class="tool-btn"
+                    onclick="showFoundation('${id}')">
+                🧠 التأسيس
+            </button>
+
+            <button class="tool-btn"
+                    onclick="youtubeForSubject('${subject.name}')">
+                🎥 شرح YouTube
+            </button>
+
+            <button class="tool-btn"
+                    onclick="scrollToTeachers()">
+                👨‍🏫 المدرسين
+            </button>
+
+            <button class="tool-btn"
+                    onclick="showLibrary()">
+                📖 الكتب
+            </button>
+
+        </div>
+
+        <div class="youtube-box">
+
+            <h2>🎥 شرح ${subject.name} من YouTube</h2>
+
+            <p style="color:#777;margin:8px 0 15px">
+                ابحث عن أي درس أو جزء في المادة مباشرة.
+            </p>
+
+            <div class="youtube-search">
+
+                <input
+                    id="ytSearch"
+                    placeholder="مثال: الدرس الأول..."
+                >
+
+                <button onclick="searchCurrentYoutube('${subject.name}')">
+                    🔎 بحث
+                </button>
+
+            </div>
+
+            <div class="video-list">
+
+                ${teachers}
+
+            </div>
+
+        </div>
+
+        <div class="foundation-box">
+
+            <h2>🧠 تأسيس المادة</h2>
+
+            <div class="rule">
+                ${getRule(subject.id)}
+            </div>
+
+            <ul>
+                ${foundation}
+            </ul>
+
+        </div>
+
+        <div class="foundation-box">
+
+            <h2>📌 طريقة مذاكرة المادة</h2>
+
+            <p style="line-height:2;color:#555">
+                افهم الفكرة الأول، وبعدها اكتب أهم النقاط،
+                اقفل الشرح وحاول تشرح لنفسك،
+                وبعد كده حل بإيدك وسجل أخطاءك.
+                راجع الدرس بعد 24 ساعة ثم بعد 3 أيام ثم أسبوع.
+            </p>
+
+        </div>
+
+        <button
+            class="action-btn"
+            onclick="showPage('subjects')"
+        >
+            ← رجوع للمواد
+        </button>
+
+    `;
+
+}
+
+
+/* =====================================================
+   FOUNDATION RULES
+===================================================== */
+
+function getRule(id){
+
+    const rules = {
+
+        arabic:
+        "📖 افهم ➜ ✍️ اكتب ➜ 🧠 سمّع ➜ 📝 حل ➜ 🔁 راجع",
+
+        english:
+        "📖 افهم ➜ 🧠 احفظ ➜ ✍️ طبّق ➜ 📝 حل ➜ 🔁 راجع",
+
+        physics:
+        "🧠 افهم القانون ➜ ✍️ اكتب ➜ 🔢 عوّض ➜ 📝 حل ➜ 🔁 راجع",
+
+        chemistry:
+        "🧠 افهم ➜ ⚗️ اربط ➜ ✍️ اكتب ➜ 📝 حل ➜ 🔁 راجع",
+
+        biology:
+        "🧠 افهم ➜ 🔗 اربط ➜ 📝 اكتب ➜ 📖 احفظ ➜ ✍️ حل ➜ 🔁 راجع",
+
+        math:
+        "📖 افهم الفكرة ➜ ✍️ اكتب القانون ➜ 📝 حل أمثلة ➜ 🔥 حل كتير ➜ 🔁 راجع",
+
+        history:
+        "📖 افهم الأحداث ➜ 🗓️ رتبها ➜ 🔗 اربط بينها ➜ 📝 احفظ ➜ ✍️ حل ➜ 🔁 راجع",
+
+        geography:
+        "🧠 افهم ➜ 🌍 اربط ➜ 📝 اكتب ➜ 📖 احفظ ➜ ✍️ حل ➜ 🔁 راجع",
+
+        statistics:
+        "🧠 افهم القانون ➜ ✍️ طبّق ➜ 📝 حل ➜ 🔁 راجع",
+
+        tawhid:
+        "🧠 افهم العقيدة ➜ اعرف الدليل ➜ اربط الأفكار ➜ احفظ ➜ حل ➜ راجع",
+
+        fiqh:
+        "🧠 افهم الحكم ➜ اعرف الدليل ➜ اعرف الشروط ➜ اربط المسائل ➜ حل ➜ راجع",
+
+        hadith:
+        "🧠 اقرأ الحديث ➜ افهم المعنى ➜ اعرف المفردات ➜ استخرج الفوائد ➜ حل ➜ راجع",
+
+        tafsir:
+        "🧠 اقرأ الآيات ➜ افهم المعنى ➜ اعرف الكلمات ➜ استخرج الفوائد ➜ حل ➜ راجع",
+
+        nahw:
+        "📖 افهم القاعدة ➜ ✍️ اكتب مثال ➜ 🔎 أعرب ➜ 📝 حل ➜ 🔁 راجع",
+
+        sarf:
+        "🧠 افهم الوزن ➜ ✍️ صرّف ➜ 📝 طبّق ➜ 🔁 راجع",
+
+        balagha:
+        "🧠 افهم الأسلوب ➜ 🔎 استخرج ➜ ✨ اعرف الجمال ➜ 📝 حل ➜ راجع",
+
+        literature:
+        "📖 افهم العصر ➜ 👤 اعرف الأدباء ➜ 🔗 اربط الخصائص ➜ 📝 حل ➜ راجع",
+
+        composition:
+        "🧠 خطط ➜ ✍️ اكتب ➜ 🔎 راجع ➜ 📝 صحح ➜ 🔁 طبّق"
+
+    };
+
+    return rules[id] || rules.arabic;
+
+}
+
+
+/* =====================================================
+   FOUNDATION MODAL
+===================================================== */
+
+function showFoundation(id){
+
+    const list =
+        SUBJECTS[currentUser.track] || [];
+
+    const subject =
+        list.find(s => s.id === id);
+
+    if(!subject) return;
+
+    const html = `
+
+        <h2>${subject.icon} تأسيس ${subject.name}</h2>
+
+        <div class="rule">
+            ${getRule(subject.id)}
+        </div>
+
+        <ul style="padding-right:25px">
+
+            ${subject.foundation
+                .map(x => `<li style="margin:12px 0">${x}</li>`)
+                .join("")}
+
+        </ul>
+
+        <br>
+
+        <p style="line-height:2">
+            💡 متبدأش في الدروس الصعبة قبل ما تكون الأساسيات دي
+            ثابتة عندك. كل ما الأساس يبقى أقوى، فهم المنهج
+            هيبقى أسرع وأسهل.
+        </p>
+
+    `;
+
+    openModal(html);
+
+}
+
+
+/* =====================================================
+   YOUTUBE
+===================================================== */
+
+function youtubeSearch(query){
+
+    return "https://www.youtube.com/results?search_query=" +
+        encodeURIComponent(query);
+
+}
+
+function youtubeForSubject(subject){
+
+    window.open(
+        youtubeSearch(
+            subject + " ثالثة ثانوي 2027 شرح كامل"
+        ),
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+}
+
+function searchCurrentYoutube(subject){
+
+    const input =
+        document.getElementById("ytSearch");
+
+    const q =
+        input.value.trim();
+
+    if(!q){
+        toast("اكتب اسم الدرس الأول");
+        return;
+    }
+
+    window.open(
+        youtubeSearch(
+            subject + " " + q + " ثالثة ثانوي"
+        ),
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+}
+
+
+/* =====================================================
+   TEACHERS
+===================================================== */
+
+function renderTeachers(){
+
+    const grid =
+        document.getElementById("teachersGrid");
+
+    grid.innerHTML =
+        ALL_TEACHERS.map(t => `
+
+            <div class="card teacher-card">
+
+                <div class="icon">${t.icon}</div>
+
+                <h3>${t.name}</h3>
+
+                <div class="teacher-subject">
+                    ${t.subject}
+                </div>
+
+                <p>
+                    🎥 شرح ومراجعات على YouTube
+                </p>
+
+                <a
+                    href="${youtubeSearch(t.search)}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-btn"
+                    style="text-decoration:none;text-align:center"
+                >
+                    ▶️ قناة / بحث YouTube
+                </a>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+/* =====================================================
+   LIBRARY
+===================================================== */
+
+function showLibrary(){
+
+    showPage("library");
+
+}
+
+
+/* =====================================================
+   EXAMS
+===================================================== */
+
+function openExams(){
+
+    window.open(
+        EXAMS_SITE,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+}
+
+
+/* =====================================================
+   GROUPS
+===================================================== */
+
+function openGroup(num){
+
+    const link =
+        num === 1 ? GROUP_1 : GROUP_2;
+
+    if(
+        link === "https://chat.whatsapp.com/"
+    ){
+        toast("⚠️ حط رابط الجروب في الكود الأول");
+        return;
+    }
+
+    window.open(
+        link,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+}
+
+function openChannel(){
+
+    window.open(
+        CHANNEL,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+let timerSeconds = 25 * 60;
+
+let timerInterval = null;
+
+function updateTimer(){
+
+    const min =
+        Math.floor(timerSeconds / 60)
+        .toString()
+        .padStart(2,"0");
+
+    const sec =
+        (timerSeconds % 60)
+        .toString()
+        .padStart(2,"0");
+
+    document.getElementById("timerDisplay")
+        .textContent =
+        `${min}:${sec}`;
+
+}
+
+function startTimer(){
+
+    if(timerInterval) return;
+
+    timerInterval =
+        setInterval(() => {
+
+            if(timerSeconds <= 0){
+
+                clearInterval(timerInterval);
+
+                timerInterval = null;
+
+                toast("🎉 خلصت جلسة المذاكرة!");
+
+                return;
+
+            }
+
+            timerSeconds--;
+
+            updateTimer();
+
+        },1000);
+
+}
+
+function pauseTimer(){
+
+    clearInterval(timerInterval);
+
+    timerInterval = null;
+
+}
+
+function resetTimer(){
+
+    pauseTimer();
+
+    timerSeconds = 25 * 60;
+
+    updateTimer();
+
+}
+
+
+/* =====================================================
+   GLOBAL SEARCH
+===================================================== */
+
+function globalSearch(){
+
+    const q =
+        document.getElementById("globalSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if(!q) return;
+
+    const subjectMatch =
+        (SUBJECTS[currentUser.track] || [])
+        .find(s =>
+            s.name.toLowerCase().includes(q)
+        );
+
+    if(subjectMatch){
+
+        openSubject(subjectMatch.id);
+
+        return;
+
+    }
+
+    const teacherMatch =
+        ALL_TEACHERS.find(t =>
+            t.name.toLowerCase().includes(q)
+        );
+
+    if(teacherMatch){
+
+        window.open(
+            youtubeSearch(teacherMatch.search),
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   PRIME AI - INSIDE THE SAME PAGE
+===================================================== */
+const PRIME_AI_URL = "https://chat.ragmyai.com/58524b8b-7941-4f11-bda2-919de42aabdf";
+
+function openPrimeAI(){
+    const modal = document.getElementById("primeAiModal");
+    const frame = document.getElementById("primeAiFrame");
+    if(!modal || !frame) return;
+
+    if(frame.src === "about:blank" || !frame.src || frame.src.endsWith("about:blank")){
+        frame.src = PRIME_AI_URL;
+    }
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+}
+
+function closePrimeAI(){
+    const modal = document.getElementById("primeAiModal");
+    if(!modal) return;
+    modal.classList.add("hidden");
+    document.body.style.overflow = "";
+}
+
+function closePrimeAIMaybe(event){
+    if(event.target.id === "primeAiModal") closePrimeAI();
+}
+
+document.addEventListener("keydown", function(event){
+    if(event.key === "Escape") closePrimeAI();
+});
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function openModal(html){
+
+    document
+        .getElementById("modalBody")
+        .innerHTML = html;
+
+    document
+        .getElementById("modal")
+        .classList.remove("hidden");
+
+}
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList.add("hidden");
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+function toast(message){
+
+    const box =
+        document.getElementById("toast");
+
+    box.textContent = message;
+
+    box.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(() => {
+
+            box.classList.remove("show");
+
+        },2500);
+
+}
+
+
+/* =====================================================
+   MOBILE SIDEBAR
+===================================================== */
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* =====================================================
+   SCROLL
+===================================================== */
+
+function scrollToTeachers(){
+
+    showPage("teachers");
+
+}
+
+
+/* =====================================================
+   INIT
+===================================================== */
+
+window.addEventListener("load",() => {
+
+    setTimeout(() => {
+
+        const intro =
+            document.getElementById("intro");
+
+        intro.style.opacity = "0";
+
+        intro.style.visibility = "hidden";
+
+        setTimeout(() => {
+
+            intro.classList.add("hidden");
+
+            const saved =
+                localStorage.getItem("tsp_current");
+
+            if(saved){
+
+                const users =
+                    getUsers();
+
+                const user =
+                    users.find(
+                        u => u.email === saved
+                    );
+
+                if(user){
+
+                    currentUser = user;
+
+                    openApp();
+
+                    return;
+
+                }
+
+            }
+
+            document
+                .getElementById("auth")
+                .classList.remove("hidden");
+
+        },700);
+
+    },3000);
+
+    updateTimer();
+
+});
+
+
+/* =====================================================
+   CLOSE MODAL OUTSIDE
+===================================================== */
+
+document
+    .getElementById("modal")
+    .addEventListener("click",function(e){
+
+        if(e.target === this){
+            closeModal();
+        }
+
+    });
+
+function finishIntro(){const intro=document.getElementById("intro");const auth=document.getElementById("auth");if(intro){intro.style.opacity="0";intro.style.visibility="hidden";setTimeout(()=>intro.remove(),750)}if(auth)auth.classList.remove("hidden")}window.addEventListener("load",()=>setTimeout(finishIntro,3000));
+</script>
+
+</body>
+</html>
