@@ -1,0 +1,2341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم | THIRD SECONDARY PRIME</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Tahoma,Arial,sans-serif;
+}
+
+:root{
+    --bg:#070707;
+    --panel:#111;
+    --panel2:#171717;
+    --gold:#d4af37;
+    --gold2:#f3d56b;
+    --text:#fff;
+    --muted:#aaa;
+    --danger:#ef4444;
+    --success:#22c55e;
+    --border:rgba(212,175,55,.18);
+}
+
+body{
+    background:
+      radial-gradient(circle at top right,rgba(212,175,55,.13),transparent 30%),
+      radial-gradient(circle at bottom left,rgba(212,175,55,.08),transparent 25%),
+      var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* LOGIN */
+#loginScreen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:430px;
+    background:rgba(17,17,17,.96);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:35px;
+    box-shadow:0 25px 80px rgba(0,0,0,.6);
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.logo .prime{
+    color:var(--gold);
+    font-size:42px;
+    font-weight:900;
+    letter-spacing:4px;
+}
+
+.logo .sub{
+    color:#ddd;
+    font-size:13px;
+    letter-spacing:3px;
+}
+
+.login-box h2{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.login-box p{
+    text-align:center;
+    color:var(--muted);
+    margin-bottom:25px;
+}
+
+/* INPUTS */
+.field{
+    margin-bottom:16px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:7px;
+    color:#ddd;
+    font-size:14px;
+}
+
+input,select,textarea{
+    width:100%;
+    border:1px solid #292929;
+    background:#0b0b0b;
+    color:white;
+    padding:13px 14px;
+    border-radius:12px;
+    outline:none;
+    transition:.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(212,175,55,.08);
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn{
+    padding:12px 17px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.btn-gold{
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#111;
+}
+
+.btn-gold:hover{
+    transform:translateY(-2px);
+}
+
+.btn-dark{
+    background:#222;
+    color:white;
+    border:1px solid #333;
+}
+
+.btn-danger{
+    background:rgba(239,68,68,.12);
+    color:#ff7777;
+    border:1px solid rgba(239,68,68,.25);
+}
+
+.btn-success{
+    background:rgba(34,197,94,.12);
+    color:#5ee58a;
+    border:1px solid rgba(34,197,94,.25);
+}
+
+.full{
+    width:100%;
+}
+
+.error{
+    color:#ff6666;
+    text-align:center;
+    margin-top:15px;
+    min-height:20px;
+}
+
+/* APP */
+#adminApp{
+    display:none;
+}
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(7,7,7,.94);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid var(--border);
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.top-brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.top-brand strong{
+    color:var(--gold);
+    font-size:20px;
+}
+
+.top-brand span{
+    color:#888;
+    font-size:12px;
+}
+
+.menu-btn{
+    display:none;
+    background:#1c1c1c;
+    color:white;
+    border:1px solid #333;
+    padding:10px 13px;
+    border-radius:10px;
+}
+
+.layout{
+    display:flex;
+    min-height:calc(100vh - 65px);
+}
+
+.sidebar{
+    width:255px;
+    background:#0d0d0d;
+    border-left:1px solid var(--border);
+    padding:20px 14px;
+    flex-shrink:0;
+}
+
+.sidebar-title{
+    color:#777;
+    font-size:12px;
+    margin:5px 10px 12px;
+}
+
+.nav-btn{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:transparent;
+    color:#bbb;
+    text-align:right;
+    padding:13px 14px;
+    margin-bottom:5px;
+    border-radius:12px;
+    font-size:14px;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+    background:rgba(212,175,55,.1);
+    color:var(--gold2);
+}
+
+.content{
+    flex:1;
+    padding:25px;
+    max-width:1500px;
+    overflow:hidden;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-head{
+    margin-bottom:25px;
+}
+
+.page-head h1{
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.page-head p{
+    color:var(--muted);
+}
+
+/* DASHBOARD */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:linear-gradient(145deg,#151515,#0d0d0d);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
+}
+
+.stat .icon{
+    font-size:25px;
+    margin-bottom:12px;
+}
+
+.stat .number{
+    font-size:28px;
+    font-weight:900;
+    color:var(--gold2);
+}
+
+.stat .label{
+    color:#999;
+    margin-top:5px;
+    font-size:13px;
+}
+
+.grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.panel{
+    background:#111;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
+}
+
+.panel h3{
+    margin-bottom:16px;
+}
+
+.quick{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.quick button{
+    background:#181818;
+    color:white;
+    border:1px solid #292929;
+    padding:15px;
+    border-radius:12px;
+    text-align:right;
+}
+
+.quick button:hover{
+    border-color:var(--gold);
+}
+
+/* TABLE */
+.table-wrap{
+    width:100%;
+    overflow:auto;
+    border:1px solid #222;
+    border-radius:15px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
+}
+
+th,td{
+    padding:13px;
+    border-bottom:1px solid #222;
+    text-align:right;
+}
+
+th{
+    background:#181818;
+    color:var(--gold2);
+    font-size:13px;
+}
+
+td{
+    color:#ddd;
+    font-size:13px;
+}
+
+tr:last-child td{
+    border-bottom:0;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.small-btn{
+    padding:7px 10px;
+    border-radius:8px;
+    font-size:12px;
+}
+
+/* FORMS */
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.full-field{
+    grid-column:1/-1;
+}
+
+.form-actions{
+    margin-top:18px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+/* ITEMS */
+.items{
+    display:grid;
+    gap:12px;
+}
+
+.item{
+    background:#171717;
+    border:1px solid #292929;
+    border-radius:14px;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.item-title{
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.item-info{
+    color:#888;
+    font-size:12px;
+}
+
+/* TOAST */
+#toast{
+    position:fixed;
+    left:20px;
+    bottom:20px;
+    background:#171717;
+    border:1px solid var(--border);
+    color:white;
+    padding:13px 17px;
+    border-radius:12px;
+    transform:translateY(100px);
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:9999;
+}
+
+#toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* MOBILE */
+@media(max-width:950px){
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid2{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        position:fixed;
+        right:-280px;
+        top:65px;
+        bottom:0;
+        z-index:90;
+        transition:.3s;
+        box-shadow:-20px 0 50px rgba(0,0,0,.5);
+    }
+
+    .sidebar.open{
+        right:0;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .content{
+        padding:18px;
+    }
+}
+
+@media(max-width:600px){
+    .cards{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat{
+        padding:15px;
+    }
+
+    .stat .number{
+        font-size:23px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full-field{
+        grid-column:auto;
+    }
+
+    .page-head h1{
+        font-size:23px;
+    }
+
+    .top-brand span{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<section id="loginScreen">
+
+    <div class="login-box">
+
+        <div class="logo">
+            <div class="prime">PRIME</div>
+            <div class="sub">THIRD SECONDARY</div>
+        </div>
+
+        <h2>لوحة تحكم المالك</h2>
+        <p>إدارة THIRD SECONDARY PRIME</p>
+
+        <div class="field">
+            <label>البريد الإلكتروني</label>
+            <input id="adminEmail" type="email" placeholder="أدخل البريد">
+        </div>
+
+        <div class="field">
+            <label>كلمة المرور</label>
+            <input id="adminPassword" type="password" placeholder="أدخل كلمة المرور">
+        </div>
+
+        <button class="btn btn-gold full" onclick="loginAdmin()">
+            🔐 دخول لوحة التحكم
+        </button>
+
+        <div id="loginError" class="error"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ADMIN APP -->
+<div id="adminApp">
+
+    <header class="topbar">
+
+        <div class="top-brand">
+            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+
+            <div>
+                <strong>THIRD SECONDARY PRIME</strong>
+                <span>Admin Control Center</span>
+            </div>
+        </div>
+
+        <button class="btn btn-danger" onclick="logoutAdmin()">
+            خروج
+        </button>
+
+    </header>
+
+
+    <div class="layout">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="sidebar">
+
+            <div class="sidebar-title">الرئيسية</div>
+
+            <button class="nav-btn active" onclick="openPage('dashboard',this)">
+                📊 لوحة المعلومات
+            </button>
+
+            <button class="nav-btn" onclick="openPage('students',this)">
+                👨‍🎓 الطلاب
+            </button>
+
+            <button class="nav-btn" onclick="openPage('teachers',this)">
+                👨‍🏫 المدرسين
+            </button>
+
+            <button class="nav-btn" onclick="openPage('subjects',this)">
+                📚 المواد
+            </button>
+
+            <button class="nav-btn" onclick="openPage('announcements',this)">
+                📢 الإعلانات
+            </button>
+
+            <button class="nav-btn" onclick="openPage('subscriptions',this)">
+                💳 الاشتراكات
+            </button>
+
+            <button class="nav-btn" onclick="openPage('ai',this)">
+                🤖 Prime AI
+            </button>
+
+            <button class="nav-btn" onclick="openPage('settings',this)">
+                ⚙️ الإعدادات
+            </button>
+
+            <button class="nav-btn" onclick="openPage('data',this)">
+                💾 البيانات
+            </button>
+
+        </aside>
+
+
+        <main class="content">
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="page active">
+
+                <div class="page-head">
+                    <h1>لوحة المعلومات 👋</h1>
+                    <p>مرحبًا بك يا مهندس محمد السيد في لوحة تحكم PRIME.</p>
+                </div>
+
+                <div class="cards">
+
+                    <div class="stat">
+                        <div class="icon">👨‍🎓</div>
+                        <div id="statStudents" class="number">0</div>
+                        <div class="label">الطلاب</div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="icon">👨‍🏫</div>
+                        <div id="statTeachers" class="number">0</div>
+                        <div class="label">المدرسين</div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="icon">📚</div>
+                        <div id="statSubjects" class="number">0</div>
+                        <div class="label">المواد</div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="icon">📢</div>
+                        <div id="statAnnouncements" class="number">0</div>
+                        <div class="label">الإعلانات</div>
+                    </div>
+
+                </div>
+
+
+                <div class="grid2">
+
+                    <div class="panel">
+                        <h3>⚡ اختصارات سريعة</h3>
+
+                        <div class="quick">
+
+                            <button onclick="goTo('students')">
+                                👨‍🎓 إدارة الطلاب
+                            </button>
+
+                            <button onclick="goTo('teachers')">
+                                👨‍🏫 إضافة مدرس
+                            </button>
+
+                            <button onclick="goTo('subjects')">
+                                📚 إضافة مادة
+                            </button>
+
+                            <button onclick="goTo('announcements')">
+                                📢 إعلان جديد
+                            </button>
+
+                        </div>
+                    </div>
+
+
+                    <div class="panel">
+
+                        <h3>👑 معلومات المالك</h3>
+
+                        <p style="color:#aaa;line-height:2">
+                            اسم المصمم والمالك:
+                            <strong style="color:#d4af37">
+                                مهندس محمد السيد
+                            </strong>
+                            <br>
+                            المنصة:
+                            <strong>THIRD SECONDARY PRIME</strong>
+                            <br>
+                            المساعد:
+                            <strong style="color:#d4af37">
+                                Prime AI
+                            </strong>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- STUDENTS -->
+            <section id="students" class="page">
+
+                <div class="page-head">
+                    <h1>👨‍🎓 إدارة الطلاب</h1>
+                    <p>عرض البيانات الموجودة في متصفح الإدارة.</p>
+                </div>
+
+                <div class="panel">
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>الاسم</th>
+                                    <th>البريد</th>
+                                    <th>الشعبة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="studentsTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div id="noStudents"
+                         style="display:none;text-align:center;color:#777;padding:25px">
+                        لا توجد حسابات طلاب محفوظة هنا.
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- TEACHERS -->
+            <section id="teachers" class="page">
+
+                <div class="page-head">
+                    <h1>👨‍🏫 إدارة المدرسين</h1>
+                    <p>إضافة وتعديل وحذف المدرسين.</p>
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>اسم المدرس</label>
+                            <input id="teacherName" placeholder="مثال: محمد أحمد">
+                        </div>
+
+                        <div class="field">
+                            <label>المادة</label>
+                            <input id="teacherSubject" placeholder="مثال: الفيزياء">
+                        </div>
+
+                        <div class="field full-field">
+                            <label>رابط المدرس / القناة</label>
+                            <input id="teacherLink" placeholder="https://...">
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button class="btn btn-gold"
+                                onclick="saveTeacher()">
+                            ➕ إضافة المدرس
+                        </button>
+
+                        <button class="btn btn-dark"
+                                onclick="clearTeacherForm()">
+                            مسح
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel" style="margin-top:18px">
+
+                    <h3>المدرسين المضافين</h3>
+
+                    <div id="teachersList" class="items"></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SUBJECTS -->
+            <section id="subjects" class="page">
+
+                <div class="page-head">
+                    <h1>📚 إدارة المواد</h1>
+                    <p>إدارة المواد وروابط المحتوى.</p>
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>اسم المادة</label>
+                            <input id="subjectName" placeholder="مثال: الكيمياء">
+                        </div>
+
+                        <div class="field">
+                            <label>رابط المحتوى</label>
+                            <input id="subjectLink" placeholder="https://...">
+                        </div>
+
+                        <div class="field full-field">
+                            <label>وصف المادة</label>
+                            <textarea id="subjectDescription"
+                            placeholder="اكتب وصفًا مختصرًا للمادة"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button class="btn btn-gold"
+                                onclick="saveSubject()">
+                            ➕ إضافة المادة
+                        </button>
+
+                        <button class="btn btn-dark"
+                                onclick="clearSubjectForm()">
+                            مسح
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel" style="margin-top:18px">
+
+                    <h3>المواد</h3>
+
+                    <div id="subjectsList" class="items"></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ANNOUNCEMENTS -->
+            <section id="announcements" class="page">
+
+                <div class="page-head">
+                    <h1>📢 الإعلانات</h1>
+                    <p>إضافة أخبار وإعلانات للمنصة.</p>
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="field">
+                        <label>عنوان الإعلان</label>
+                        <input id="announcementTitle"
+                               placeholder="مثال: بدء امتحان جديد">
+                    </div>
+
+                    <div class="field">
+                        <label>نص الإعلان</label>
+                        <textarea id="announcementText"
+                        placeholder="اكتب الإعلان هنا"></textarea>
+                    </div>
+
+                    <button class="btn btn-gold"
+                            onclick="saveAnnouncement()">
+                        📢 نشر الإعلان
+                    </button>
+
+                </div>
+
+
+                <div class="panel" style="margin-top:18px">
+
+                    <h3>الإعلانات المنشورة</h3>
+
+                    <div id="announcementsList" class="items"></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SUBSCRIPTIONS -->
+            <section id="subscriptions" class="page">
+
+                <div class="page-head">
+                    <h1>💳 الاشتراكات</h1>
+                    <p>إعداد أسعار وخطط PRIME.</p>
+                </div>
+
+
+                <div class="grid2">
+
+                    <div class="panel">
+
+                        <h3>🥉 Prime Basic</h3>
+
+                        <div class="field">
+                            <label>السعر بالجنيه</label>
+                            <input id="basicPrice" type="number" value="49">
+                        </div>
+
+                        <div class="field">
+                            <label>عدد الرسائل / الاستخدامات</label>
+                            <input id="basicLimit" type="number" value="50">
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <h3>🥈 Prime Plus</h3>
+
+                        <div class="field">
+                            <label>السعر بالجنيه</label>
+                            <input id="plusPrice" type="number" value="99">
+                        </div>
+
+                        <div class="field">
+                            <label>عدد الاستخدامات</label>
+                            <input id="plusLimit" type="number" value="150">
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <h3>🥇 Prime Pro</h3>
+
+                        <div class="field">
+                            <label>السعر بالجنيه</label>
+                            <input id="proPrice" type="number" value="179">
+                        </div>
+
+                        <div class="field">
+                            <label>عدد الاستخدامات</label>
+                            <input id="proLimit" type="number" value="500">
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <h3>👑 Prime Unlimited</h3>
+
+                        <div class="field">
+                            <label>السعر بالجنيه</label>
+                            <input id="unlimitedPrice" type="number" value="299">
+                        </div>
+
+                        <div class="field">
+                            <label>الاستخدامات</label>
+                            <input value="غير محدود" disabled>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div style="margin-top:18px">
+
+                    <button class="btn btn-gold"
+                            onclick="saveSubscriptions()">
+                        💾 حفظ أسعار الاشتراكات
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- AI -->
+            <section id="ai" class="page">
+
+                <div class="page-head">
+                    <h1>🤖 Prime AI</h1>
+                    <p>إعدادات المساعد الذكي.</p>
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="field">
+                        <label>اسم المساعد</label>
+                        <input id="aiName" value="Prime AI">
+                    </div>
+
+                    <div class="field">
+                        <label>رابط Prime AI</label>
+                        <input id="aiUrl"
+                        value="https://chat.ragmyai.com/58524b8b-7941-4f11-bda2-919de42aabdf">
+                    </div>
+
+                    <div class="field">
+                        <label>وصف المساعد</label>
+                        <textarea id="aiDescription">مساعدك الدراسي لتالتة ثانوي. يشرح ويحل ويراجع مع الطالب بطريقة بسيطة وودية.</textarea>
+                    </div>
+
+                    <div class="field">
+                        <label>رسالة الترحيب</label>
+                        <textarea id="aiWelcome">أهلاً بيك 👋 أنا Prime AI، مساعدك الدراسي في THIRD SECONDARY PRIME.</textarea>
+                    </div>
+
+                    <button class="btn btn-gold"
+                            onclick="saveAI()">
+                        💾 حفظ إعدادات Prime AI
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- SETTINGS -->
+            <section id="settings" class="page">
+
+                <div class="page-head">
+                    <h1>⚙️ إعدادات المنصة</h1>
+                    <p>إعداد البيانات الأساسية والروابط.</p>
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>اسم المنصة</label>
+                            <input id="platformName"
+                                   value="THIRD SECONDARY PRIME">
+                        </div>
+
+                        <div class="field">
+                            <label>اسم المصمم</label>
+                            <input id="designerName"
+                                   value="مهندس محمد السيد">
+                        </div>
+
+                        <div class="field">
+                            <label>رقم التواصل</label>
+                            <input id="phone"
+                                   placeholder="أدخل رقم التواصل">
+                        </div>
+
+                        <div class="field">
+                            <label>رابط قناة WhatsApp</label>
+                            <input id="whatsapp"
+                            value="https://whatsapp.com/channel/0029Vb5p6Pd8KMqieGUwrG01">
+                        </div>
+
+                        <div class="field full-field">
+                            <label>رابط الموقع الرئيسي</label>
+                            <input id="mainSite"
+                            value="https://third-secondary-prime--mohamed-elsa-psi.vercel.app/">
+                        </div>
+
+                    </div>
+
+
+                    <button class="btn btn-gold"
+                            onclick="saveSettings()">
+                        💾 حفظ الإعدادات
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- DATA -->
+            <section id="data" class="page">
+
+                <div class="page-head">
+                    <h1>💾 البيانات</h1>
+                    <p>نسخ احتياطي واسترجاع بيانات لوحة التحكم.</p>
+                </div>
+
+
+                <div class="panel">
+
+                    <h3>📦 تصدير البيانات</h3>
+
+                    <p style="color:#888;margin:10px 0 18px">
+                        احفظ نسخة من بيانات المدرسين والمواد والإعلانات
+                        والإعدادات على جهازك.
+                    </p>
+
+                    <button class="btn btn-gold"
+                            onclick="exportData()">
+                        ⬇️ تحميل نسخة احتياطية
+                    </button>
+
+                </div>
+
+
+                <div class="panel" style="margin-top:18px">
+
+                    <h3>📥 استرجاع البيانات</h3>
+
+                    <p style="color:#888;margin:10px 0 18px">
+                        اختر ملف النسخة الاحتياطية الذي تم تصديره سابقًا.
+                    </p>
+
+                    <input id="importFile"
+                           type="file"
+                           accept=".json"
+                           onchange="importData(event)">
+
+                </div>
+
+
+                <div class="panel" style="margin-top:18px">
+
+                    <h3>⚠️ منطقة خطرة</h3>
+
+                    <p style="color:#888;margin:10px 0 18px">
+                        حذف بيانات لوحة التحكم المحلية فقط.
+                    </p>
+
+                    <button class="btn btn-danger"
+                            onclick="clearAllData()">
+                        🗑️ حذف بيانات الإدارة
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<div id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   THIRD SECONDARY PRIME
+   ADMIN PANEL
+   Designer: Mohamed El Sayed
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   ADMIN LOGIN
+   --------------------------------------------------------- */
+
+/*
+   غيّر البيانات هنا لو عايز تسجيل دخول مختلف.
+
+   مهم:
+   هذه حماية واجهة فقط وليست حماية Backend حقيقية.
+*/
+
+const ADMIN_EMAIL = "admin@prime.local";
+const ADMIN_PASSWORD = "PrimeAdmin2026";
+
+
+function loginAdmin(){
+
+    const email =
+        document.getElementById("adminEmail").value.trim();
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    const error =
+        document.getElementById("loginError");
+
+    if(email === ADMIN_EMAIL && password === ADMIN_PASSWORD){
+
+        localStorage.setItem("prime_admin_logged","true");
+
+        document.getElementById("loginScreen").style.display="none";
+        document.getElementById("adminApp").style.display="block";
+
+        loadAll();
+
+    }else{
+
+        error.textContent =
+            "❌ البريد الإلكتروني أو كلمة المرور غير صحيحة";
+
+    }
+}
+
+
+function logoutAdmin(){
+
+    localStorage.removeItem("prime_admin_logged");
+
+    document.getElementById("adminApp").style.display="none";
+    document.getElementById("loginScreen").style.display="flex";
+
+}
+
+
+/* ---------------------------------------------------------
+   NAVIGATION
+   --------------------------------------------------------- */
+
+function openPage(id,button){
+
+    document.querySelectorAll(".page")
+        .forEach(p=>p.classList.remove("active"));
+
+    const page=document.getElementById(id);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+    document.querySelectorAll(".nav-btn")
+        .forEach(b=>b.classList.remove("active"));
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    document.getElementById("sidebar")
+        .classList.remove("open");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+function goTo(id){
+
+    const button =
+        [...document.querySelectorAll(".nav-btn")]
+        .find(b=>b.getAttribute("onclick")?.includes("'"+id+"'"));
+
+    openPage(id,button);
+}
+
+
+function toggleSidebar(){
+
+    document.getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* ---------------------------------------------------------
+   TOAST
+   --------------------------------------------------------- */
+
+function toast(message){
+
+    const box=document.getElementById("toast");
+
+    box.textContent=message;
+
+    box.classList.add("show");
+
+    setTimeout(()=>{
+        box.classList.remove("show");
+    },2500);
+
+}
+
+
+/* ---------------------------------------------------------
+   STORAGE HELPERS
+   --------------------------------------------------------- */
+
+function getData(key,defaultValue=[]){
+
+    try{
+
+        const value=localStorage.getItem(key);
+
+        return value
+            ? JSON.parse(value)
+            : defaultValue;
+
+    }catch(e){
+
+        return defaultValue;
+
+    }
+}
+
+
+function setData(key,value){
+
+    localStorage.setItem(
+        key,
+        JSON.stringify(value)
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   STUDENTS
+   --------------------------------------------------------- */
+
+function loadStudents(){
+
+    const users =
+        getData("tsp_users",[]);
+
+    const table =
+        document.getElementById("studentsTable");
+
+    const noStudents =
+        document.getElementById("noStudents");
+
+    table.innerHTML="";
+
+    document.getElementById("statStudents")
+        .textContent=users.length;
+
+    if(!users.length){
+
+        noStudents.style.display="block";
+
+        return;
+
+    }
+
+    noStudents.style.display="none";
+
+    users.forEach((user,index)=>{
+
+        const row=document.createElement("tr");
+
+        row.innerHTML=`
+
+            <td>${index+1}</td>
+
+            <td>
+                ${escapeHTML(user.name || "بدون اسم")}
+            </td>
+
+            <td>
+                ${escapeHTML(user.email || "-")}
+            </td>
+
+            <td>
+                ${escapeHTML(user.track || "-")}
+            </td>
+
+            <td>
+
+                <div class="actions">
+
+                    <button
+                        class="btn btn-danger small-btn"
+                        onclick="deleteStudent(${index})">
+                        حذف
+                    </button>
+
+                </div>
+
+            </td>
+
+        `;
+
+        table.appendChild(row);
+
+    });
+
+}
+
+
+function deleteStudent(index){
+
+    if(!confirm("هل تريد حذف هذا الطالب من البيانات المحلية؟")){
+        return;
+    }
+
+    const users=getData("tsp_users",[]);
+
+    users.splice(index,1);
+
+    setData("tsp_users",users);
+
+    loadStudents();
+
+    toast("تم حذف الطالب");
+
+}
+
+
+/* ---------------------------------------------------------
+   TEACHERS
+   --------------------------------------------------------- */
+
+function loadTeachers(){
+
+    const teachers =
+        getData("prime_admin_teachers",[]);
+
+    const box =
+        document.getElementById("teachersList");
+
+    box.innerHTML="";
+
+    document.getElementById("statTeachers")
+        .textContent=teachers.length;
+
+    if(!teachers.length){
+
+        box.innerHTML=
+            `<div style="color:#777">لا يوجد مدرسين مضافين.</div>`;
+
+        return;
+
+    }
+
+    teachers.forEach((teacher,index)=>{
+
+        const item=document.createElement("div");
+
+        item.className="item";
+
+        item.innerHTML=`
+
+            <div>
+
+                <div class="item-title">
+                    👨‍🏫 ${escapeHTML(teacher.name)}
+                </div>
+
+                <div class="item-info">
+                    المادة: ${escapeHTML(teacher.subject)}
+                </div>
+
+                ${
+                    teacher.link
+                    ?
+                    `<div class="item-info">
+                        🔗 ${escapeHTML(teacher.link)}
+                    </div>`
+                    :
+                    ""
+                }
+
+            </div>
+
+            <div class="actions">
+
+                ${
+                    teacher.link
+                    ?
+                    `<button
+                        class="btn btn-dark small-btn"
+                        onclick="window.open('${safeURL(teacher.link)}','_blank')">
+                        فتح
+                    </button>`
+                    :
+                    ""
+                }
+
+                <button
+                    class="btn btn-danger small-btn"
+                    onclick="deleteTeacher(${index})">
+                    حذف
+                </button>
+
+            </div>
+
+        `;
+
+        box.appendChild(item);
+
+    });
+
+}
+
+
+function saveTeacher(){
+
+    const name =
+        document.getElementById("teacherName")
+        .value.trim();
+
+    const subject =
+        document.getElementById("teacherSubject")
+        .value.trim();
+
+    const link =
+        document.getElementById("teacherLink")
+        .value.trim();
+
+    if(!name || !subject){
+
+        toast("اكتب اسم المدرس والمادة");
+
+        return;
+
+    }
+
+    const teachers =
+        getData("prime_admin_teachers",[]);
+
+    teachers.push({
+        id:Date.now(),
+        name,
+        subject,
+        link
+    });
+
+    setData("prime_admin_teachers",teachers);
+
+    clearTeacherForm();
+
+    loadTeachers();
+
+    toast("تمت إضافة المدرس ✅");
+
+}
+
+
+function deleteTeacher(index){
+
+    if(!confirm("حذف المدرس؟")){
+        return;
+    }
+
+    const teachers =
+        getData("prime_admin_teachers",[]);
+
+    teachers.splice(index,1);
+
+    setData("prime_admin_teachers",teachers);
+
+    loadTeachers();
+
+    toast("تم حذف المدرس");
+
+}
+
+
+function clearTeacherForm(){
+
+    document.getElementById("teacherName").value="";
+    document.getElementById("teacherSubject").value="";
+    document.getElementById("teacherLink").value="";
+
+}
+
+
+/* ---------------------------------------------------------
+   SUBJECTS
+   --------------------------------------------------------- */
+
+function loadSubjects(){
+
+    const subjects =
+        getData("prime_admin_subjects",[]);
+
+    const box =
+        document.getElementById("subjectsList");
+
+    box.innerHTML="";
+
+    document.getElementById("statSubjects")
+        .textContent=subjects.length;
+
+    if(!subjects.length){
+
+        box.innerHTML=
+            `<div style="color:#777">لا توجد مواد مضافة.</div>`;
+
+        return;
+
+    }
+
+    subjects.forEach((subject,index)=>{
+
+        const item=document.createElement("div");
+
+        item.className="item";
+
+        item.innerHTML=`
+
+            <div>
+
+                <div class="item-title">
+                    📚 ${escapeHTML(subject.name)}
+                </div>
+
+                <div class="item-info">
+                    ${escapeHTML(subject.description || "بدون وصف")}
+                </div>
+
+                ${
+                    subject.link
+                    ?
+                    `<div class="item-info">
+                        🔗 ${escapeHTML(subject.link)}
+                    </div>`
+                    :
+                    ""
+                }
+
+            </div>
+
+            <div class="actions">
+
+                ${
+                    subject.link
+                    ?
+                    `<button
+                        class="btn btn-dark small-btn"
+                        onclick="window.open('${safeURL(subject.link)}','_blank')">
+                        فتح
+                    </button>`
+                    :
+                    ""
+                }
+
+                <button
+                    class="btn btn-danger small-btn"
+                    onclick="deleteSubject(${index})">
+                    حذف
+                </button>
+
+            </div>
+
+        `;
+
+        box.appendChild(item);
+
+    });
+
+}
+
+
+function saveSubject(){
+
+    const name =
+        document.getElementById("subjectName")
+        .value.trim();
+
+    const link =
+        document.getElementById("subjectLink")
+        .value.trim();
+
+    const description =
+        document.getElementById("subjectDescription")
+        .value.trim();
+
+    if(!name){
+
+        toast("اكتب اسم المادة");
+
+        return;
+
+    }
+
+    const subjects =
+        getData("prime_admin_subjects",[]);
+
+    subjects.push({
+        id:Date.now(),
+        name,
+        link,
+        description
+    });
+
+    setData("prime_admin_subjects",subjects);
+
+    clearSubjectForm();
+
+    loadSubjects();
+
+    toast("تمت إضافة المادة ✅");
+
+}
+
+
+function deleteSubject(index){
+
+    if(!confirm("حذف المادة؟")){
+        return;
+    }
+
+    const subjects =
+        getData("prime_admin_subjects",[]);
+
+    subjects.splice(index,1);
+
+    setData("prime_admin_subjects",subjects);
+
+    loadSubjects();
+
+    toast("تم حذف المادة");
+
+}
+
+
+function clearSubjectForm(){
+
+    document.getElementById("subjectName").value="";
+    document.getElementById("subjectLink").value="";
+    document.getElementById("subjectDescription").value="";
+
+}
+
+
+/* ---------------------------------------------------------
+   ANNOUNCEMENTS
+   --------------------------------------------------------- */
+
+function loadAnnouncements(){
+
+    const announcements =
+        getData("prime_admin_announcements",[]);
+
+    const box =
+        document.getElementById("announcementsList");
+
+    box.innerHTML="";
+
+    document.getElementById("statAnnouncements")
+        .textContent=announcements.length;
+
+    if(!announcements.length){
+
+        box.innerHTML=
+            `<div style="color:#777">لا توجد إعلانات.</div>`;
+
+        return;
+
+    }
+
+    [...announcements]
+    .reverse()
+    .forEach((announcement,index)=>{
+
+        const realIndex =
+            announcements.length-1-index;
+
+        const item=document.createElement("div");
+
+        item.className="item";
+
+        item.innerHTML=`
+
+            <div>
+
+                <div class="item-title">
+                    📢 ${escapeHTML(announcement.title)}
+                </div>
+
+                <div style="color:#ccc;line-height:1.8;margin-top:5px">
+                    ${escapeHTML(announcement.text)}
+                </div>
+
+                <div class="item-info" style="margin-top:7px">
+                    ${escapeHTML(announcement.date || "")}
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-danger small-btn"
+                onclick="deleteAnnouncement(${realIndex})">
+                حذف
+            </button>
+
+        `;
+
+        box.appendChild(item);
+
+    });
+
+}
+
+
+function saveAnnouncement(){
+
+    const title =
+        document.getElementById("announcementTitle")
+        .value.trim();
+
+    const text =
+        document.getElementById("announcementText")
+        .value.trim();
+
+    if(!title || !text){
+
+        toast("اكتب عنوان ونص الإعلان");
+
+        return;
+
+    }
+
+    const announcements =
+        getData("prime_admin_announcements",[]);
+
+    announcements.push({
+
+        id:Date.now(),
+
+        title,
+
+        text,
+
+        date:new Date().toLocaleString("ar-EG")
+
+    });
+
+    setData(
+        "prime_admin_announcements",
+        announcements
+    );
+
+    document.getElementById("announcementTitle").value="";
+    document.getElementById("announcementText").value="";
+
+    loadAnnouncements();
+
+    toast("تم نشر الإعلان 📢");
+
+}
+
+
+function deleteAnnouncement(index){
+
+    if(!confirm("حذف الإعلان؟")){
+        return;
+    }
+
+    const announcements =
+        getData("prime_admin_announcements",[]);
+
+    announcements.splice(index,1);
+
+    setData(
+        "prime_admin_announcements",
+        announcements
+    );
+
+    loadAnnouncements();
+
+    toast("تم حذف الإعلان");
+
+}
+
+
+/* ---------------------------------------------------------
+   SUBSCRIPTIONS
+   --------------------------------------------------------- */
+
+function loadSubscriptions(){
+
+    const data =
+        getData(
+            "prime_admin_subscriptions",
+            {
+                basicPrice:49,
+                basicLimit:50,
+                plusPrice:99,
+                plusLimit:150,
+                proPrice:179,
+                proLimit:500,
+                unlimitedPrice:299
+            }
+        );
+
+    document.getElementById("basicPrice").value=data.basicPrice;
+    document.getElementById("basicLimit").value=data.basicLimit;
+
+    document.getElementById("plusPrice").value=data.plusPrice;
+    document.getElementById("plusLimit").value=data.plusLimit;
+
+    document.getElementById("proPrice").value=data.proPrice;
+    document.getElementById("proLimit").value=data.proLimit;
+
+    document.getElementById("unlimitedPrice").value=data.unlimitedPrice;
+
+}
+
+
+function saveSubscriptions(){
+
+    const data={
+
+        basicPrice:Number(
+            document.getElementById("basicPrice").value
+        ),
+
+        basicLimit:Number(
+            document.getElementById("basicLimit").value
+        ),
+
+        plusPrice:Number(
+            document.getElementById("plusPrice").value
+        ),
+
+        plusLimit:Number(
+            document.getElementById("plusLimit").value
+        ),
+
+        proPrice:Number(
+            document.getElementById("proPrice").value
+        ),
+
+        proLimit:Number(
+            document.getElementById("proLimit").value
+        ),
+
+        unlimitedPrice:Number(
+            document.getElementById("unlimitedPrice").value
+        )
+
+    };
+
+    setData(
+        "prime_admin_subscriptions",
+        data
+    );
+
+    toast("تم حفظ أسعار الاشتراكات 💳");
+
+}
+
+
+/* ---------------------------------------------------------
+   PRIME AI
+   --------------------------------------------------------- */
+
+function loadAI(){
+
+    const data =
+        getData(
+            "prime_admin_ai",
+            {
+                name:"Prime AI",
+
+                url:"https://chat.ragmyai.com/58524b8b-7941-4f11-bda2-919de42aabdf",
+
+                description:
+                "مساعدك الدراسي لتالتة ثانوي. يشرح ويحل ويراجع مع الطالب بطريقة بسيطة وودية.",
+
+                welcome:
+                "أهلاً بيك 👋 أنا Prime AI، مساعدك الدراسي في THIRD SECONDARY PRIME."
+
+            }
+        );
+
+    document.getElementById("aiName").value=data.name;
+    document.getElementById("aiUrl").value=data.url;
+    document.getElementById("aiDescription").value=data.description;
+    document.getElementById("aiWelcome").value=data.welcome;
+
+}
+
+
+function saveAI(){
+
+    const data={
+
+        name:
+        document.getElementById("aiName").value.trim(),
+
+        url:
+        document.getElementById("aiUrl").value.trim(),
+
+        description:
+        document.getElementById("aiDescription").value.trim(),
+
+        welcome:
+        document.getElementById("aiWelcome").value.trim()
+
+    };
+
+    setData("prime_admin_ai",data);
+
+    toast("تم حفظ إعدادات Prime AI 🤖");
+
+}
+
+
+/* ---------------------------------------------------------
+   SETTINGS
+   --------------------------------------------------------- */
+
+function loadSettings(){
+
+    const data =
+        getData(
+            "prime_admin_settings",
+            {
+                platformName:"THIRD SECONDARY PRIME",
+                designerName:"مهندس محمد السيد",
+                phone:"",
+                whatsapp:
+                "https://whatsapp.com/channel/0029Vb5p6Pd8KMqieGUwrG01",
+                mainSite:
+                "https://third-secondary-prime--mohamed-elsa-psi.vercel.app/"
+            }
+        );
+
+    document.getElementById("platformName").value=data.platformName;
+    document.getElementById("designerName").value=data.designerName;
+    document.getElementById("phone").value=data.phone;
+    document.getElementById("whatsapp").value=data.whatsapp;
+    document.getElementById("mainSite").value=data.mainSite;
+
+}
+
+
+function saveSettings(){
+
+    const data={
+
+        platformName:
+        document.getElementById("platformName").value.trim(),
+
+        designerName:
+        document.getElementById("designerName").value.trim(),
+
+        phone:
+        document.getElementById("phone").value.trim(),
+
+        whatsapp:
+        document.getElementById("whatsapp").value.trim(),
+
+        mainSite:
+        document.getElementById("mainSite").value.trim()
+
+    };
+
+    setData("prime_admin_settings",data);
+
+    toast("تم حفظ إعدادات المنصة ⚙️");
+
+}
+
+
+/* ---------------------------------------------------------
+   EXPORT
+   --------------------------------------------------------- */
+
+function exportData(){
+
+    const backup={
+
+        version:"1.0",
+
+        exportedAt:new Date().toISOString(),
+
+        teachers:
+        getData("prime_admin_teachers",[]),
+
+        subjects:
+        getData("prime_admin_subjects",[]),
+
+        announcements:
+        getData("prime_admin_announcements",[]),
+
+        subscriptions:
+        getData("prime_admin_subscriptions",{}),
+
+        ai:
+        getData("prime_admin_ai",{}),
+
+        settings:
+        getData("prime_admin_settings",{})
+
+    };
+
+    const blob =
+        new Blob(
+            [JSON.stringify(backup,null,2)],
+            {type:"application/json"}
+        );
+
+    const url=
+        URL.createObjectURL(blob);
+
+    const a=document.createElement("a");
+
+    a.href=url;
+
+    a.download=
+        "prime-admin-backup-"+Date.now()+".json";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+    toast("تم تصدير النسخة الاحتياطية 💾");
+
+}
+
+
+/* ---------------------------------------------------------
+   IMPORT
+   --------------------------------------------------------- */
+
+function importData(event){
+
+    const file=event.target.files[0];
+
+    if(!file){
+        return;
+    }
+
+    const reader=new FileReader();
+
+    reader.onload=function(e){
+
+        try{
+
+            const data=
+                JSON.parse(e.target.result);
+
+            if(data.teachers)
+                setData(
+                    "prime_admin_teachers",
+                    data.teachers
+                );
+
+            if(data.subjects)
+                setData(
+                    "prime_admin_subjects",
+                    data.subjects
+                );
+
+            if(data.announcements)
+                setData(
+                    "prime_admin_announcements",
+                    data.announcements
+                );
+
+            if(data.subscriptions)
+                setData(
+                    "prime_admin_subscriptions",
+                    data.subscriptions
+                );
+
+            if(data.ai)
+                setData(
+                    "prime_admin_ai",
+                    data.ai
+                );
+
+            if(data.settings)
+                setData(
+                    "prime_admin_settings",
+                    data.settings
+                );
+
+            loadAll();
+
+            toast("تم استرجاع البيانات ✅");
+
+        }catch(error){
+
+            toast("❌ ملف النسخة الاحتياطية غير صالح");
+
+        }
+
+    };
+
+    reader.readAsText(file);
+
+}
+
+
+/* ---------------------------------------------------------
+   CLEAR DATA
+   --------------------------------------------------------- */
+
+function clearAllData(){
+
+    if(!confirm(
+        "⚠️ سيتم حذف بيانات الإدارة المحلية.\nهل أنت متأكد؟"
+    )){
+        return;
+    }
+
+    const keys=[
+
+        "prime_admin_teachers",
+        "prime_admin_subjects",
+        "prime_admin_announcements",
+        "prime_admin_subscriptions",
+        "prime_admin_ai",
+        "prime_admin_settings"
+
+    ];
+
+    keys.forEach(key=>{
+        localStorage.removeItem(key);
+    });
+
+    loadAll();
+
+    toast("تم حذف بيانات الإدارة");
+
+}
+
+
+/* ---------------------------------------------------------
+   SECURITY / HELPERS
+   --------------------------------------------------------- */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function safeURL(value){
+
+    const url=String(value || "").trim();
+
+    if(
+        url.startsWith("https://") ||
+        url.startsWith("http://")
+    ){
+
+        return url.replace(/'/g,"%27");
+
+    }
+
+    return "#";
+
+}
+
+
+/* ---------------------------------------------------------
+   LOAD EVERYTHING
+   --------------------------------------------------------- */
+
+function loadAll(){
+
+    loadStudents();
+    loadTeachers();
+    loadSubjects();
+    loadAnnouncements();
+    loadSubscriptions();
+    loadAI();
+    loadSettings();
+
+}
+
+
+/* ---------------------------------------------------------
+   START
+   --------------------------------------------------------- */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const logged =
+        localStorage.getItem("prime_admin_logged");
+
+    if(logged==="true"){
+
+        document.getElementById("loginScreen")
+            .style.display="none";
+
+        document.getElementById("adminApp")
+            .style.display="block";
+
+        loadAll();
+
+    }
+
+    document.getElementById("adminPassword")
+        .addEventListener("keydown",(event)=>{
+
+            if(event.key==="Enter"){
+                loginAdmin();
+            }
+
+        });
+
+});
+
+</script>
+
+</body>
+</html>
